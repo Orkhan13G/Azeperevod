@@ -82,3 +82,6 @@ main .services-section{background:linear-gradient(#edf4fd,#fff 300px);padding-to
 main .services-section{background:linear-gradient(#fff,#f8fbff 300px)}
 @media(max-width:900px){.hero{min-height:600px;padding:90px 0 22px;gap:38px}}
 @media(max-width:550px){.hero{min-height:570px;padding:76px 0 18px;gap:36px}.hero .flag-heading p{font-size:11px}.hero .flag-item{width:112px;flex-basis:112px}.hero .flag-item img{width:48px;height:36px}.hero .flag-item span{font-size:12px}}
+/* Apply the same hover highlight to both colors in the benefits grid. */
+.why-grid .why-card:hover{background:#f1f5fd}
+.why-grid .why-card:nth-child(2):hover,.why-grid .why-card:nth-child(3):hover{background:#f6f2fd}
