@@ -89,10 +89,10 @@ out vec4 outputColor;
 void main(){
   vec2 p=coord-.5;
   vec4 softened=vec4(0);
-  for(int i=0;i<8;i++){
-    float angle=-.02*float(i)/8.0;
+  for(int i=0;i<6;i++){
+    float angle=-.02*float(i)/6.0;
     vec2 q=vec2(p.x*cos(angle)-p.y*sin(angle),p.x*sin(angle)+p.y*cos(angle));
-    softened+=texture(sceneImage,q+.5)/8.0;
+    softened+=texture(sceneImage,q+.5)/6.0;
   }
   float sharpness=smoothstep(0.0,.7,coord.y)-smoothstep(.2,1.0,coord.y);
   vec4 color=mix(softened,texture(sceneImage,coord),sharpness);
@@ -109,10 +109,22 @@ void main(){
   }
   return i;
 };
-function Q(R, p) {
-  const i = -0.449592653589793, e = -0.117592653589793, m = 1.87440734641021, n = Math.cos(i), t = Math.sin(i), s = Math.cos(e), u = Math.sin(e), c = Math.cos(m), a = Math.sin(m), b = [s * c * 9, (n * a + t * c * u) * 9, (t * a - n * c * u) * 9, 0, -s * a * 8, (n * c - t * a * u) * 8, (t * c + n * a * u) * 8, 0, u * 5, -t * s * 5, n * s * 5, 0, 380, -301.7, -11.1, 1], E = Math.hypot(100, 5e3), d = 100 / E, h = 5e3 / E, T = [h, 0, d, 0, 0, 1, 0, 0, -d, 0, h, 0, 0, 0, -E, 1], o = new Float32Array([2 / R, 0, 0, 0, 0, 2 / p, 0, 0, 0, 0, -2 / 9999, 0, 0, 0, -10001 / 9999, 1]);
-  return { modelView: $(T, b), projection: o };
+// Match the homepage reference's orthographic camera and breakpoint transforms.
+function Q(width, height) {
+  const small=window.innerWidth<640, medium=window.innerWidth<1264;
+  const rx=small?-.5:medium?-.64:-.449592653589793;
+  const ry=-.117592653589793, rz=small?1.64:medium?1.68:1.87440734641021;
+  const tx=small?320:medium?525:380, ty=small?-315:-301.7;
+  const cx=Math.cos(rx),sx=Math.sin(rx),cy=Math.cos(ry),sy=Math.sin(ry),cz=Math.cos(rz),sz=Math.sin(rz);
+  const model=[cy*cz*9,(cx*sz+sx*cz*sy)*9,(sx*sz-cx*cz*sy)*9,0,
+    -cy*sz*8,(cx*cz-sx*sz*sy)*8,(sx*cz+cx*sz*sy)*8,0,
+    sy*5,-sx*cy*5,cx*cy*5,0,tx,ty,-11.1,1];
+  const distance=Math.hypot(100,5000),sin=100/distance,cos=5000/distance;
+  const view=[cos,0,sin,0,0,1,0,0,-sin,0,cos,0,0,0,-distance,1];
+  const projection=new Float32Array([2/width,0,0,0,0,2/height,0,0,0,0,-2/9999,0,0,0,-10001/9999,1]);
+  return {modelView:$(view,model),projection};
 }
+
 async function J(R, p) {
   const n = new Float32Array(165765), t = new Uint16Array(128 * 256 * 6);
   let s = 0, u = 0;
@@ -207,16 +219,16 @@ async function Z(R, p, { signal: i } = {}) {
     e.bindTexture(e.TEXTURE_2D, I), e.pixelStorei(e.UNPACK_FLIP_Y_WEBGL, true), e.texImage2D(e.TEXTURE_2D, 0, e.SRGB8_ALPHA8, e.RGBA, e.UNSIGNED_BYTE, x), e.texParameteri(e.TEXTURE_2D, e.TEXTURE_WRAP_S, e.MIRRORED_REPEAT), e.texParameteri(e.TEXTURE_2D, e.TEXTURE_WRAP_T, e.MIRRORED_REPEAT), e.texParameteri(e.TEXTURE_2D, e.TEXTURE_MIN_FILTER, e.LINEAR_MIPMAP_LINEAR), e.texParameteri(e.TEXTURE_2D, e.TEXTURE_MAG_FILTER, e.LINEAR), e.generateMipmap(e.TEXTURE_2D), e.pixelStorei(e.UNPACK_FLIP_Y_WEBGL, false);
     const g = a("Texture");
     e.bindTexture(e.TEXTURE_2D, g), e.texParameteri(e.TEXTURE_2D, e.TEXTURE_MIN_FILTER, e.LINEAR), e.texParameteri(e.TEXTURE_2D, e.TEXTURE_MAG_FILTER, e.LINEAR), e.texParameteri(e.TEXTURE_2D, e.TEXTURE_WRAP_S, e.CLAMP_TO_EDGE), e.texParameteri(e.TEXTURE_2D, e.TEXTURE_WRAP_T, e.CLAMP_TO_EDGE);
-    const y = a("Renderbuffer"), P = a("Framebuffer"), W = Array.from(e.getInternalformatParameter(e.RENDERBUFFER, e.RGBA8, e.SAMPLES)), Y = Array.from(e.getInternalformatParameter(e.RENDERBUFFER, e.DEPTH_COMPONENT24, e.SAMPLES)), B = Math.max(0, ...W.filter((f) => f <= 4 && Y.includes(f))), w = B > 1 ? a("Framebuffer") : null, S = w ? a("Renderbuffer") : null, v = (f) => e.getUniformLocation(l, f), U = { model: v("modelViewMatrix"), projection: v("projectionMatrix"), time: v("elapsed"), height: v("pixelHeight") };
-    e.useProgram(l), e.uniform1i(v("palette"), 0), e.useProgram(r), e.uniform1i(e.getUniformLocation(r, "sceneImage"), 0), e.disable(e.CULL_FACE), e.disable(e.BLEND), e.depthFunc(e.LEQUAL), e.clearColor(1, 1, 1, 0);
+    const y = a("Renderbuffer"), P = a("Framebuffer"), W = Array.from(e.getInternalformatParameter(e.RENDERBUFFER, e.RGBA8, e.SAMPLES)), Y = Array.from(e.getInternalformatParameter(e.RENDERBUFFER, e.DEPTH_COMPONENT24, e.SAMPLES)), B = 0, w = B > 1 ? a("Framebuffer") : null, S = w ? a("Renderbuffer") : null, v = (f) => e.getUniformLocation(l, f), U = { model: v("modelViewMatrix"), projection: v("projectionMatrix"), time: v("elapsed"), height: v("pixelHeight") };
+    e.useProgram(l), e.uniform1i(v("palette"), 0), e.useProgram(r), e.uniform1i(e.getUniformLocation(r, "sceneImage"), 0), e.disable(e.CULL_FACE), e.disable(e.BLEND), e.depthFunc(e.LEQUAL), e.clearColor(0, 0, 0, 0);
     const N = (f) => {
       n || !t || e.isContextLost() || (u = f, e.viewport(0, 0, t, s), e.activeTexture(e.TEXTURE0), e.bindFramebuffer(e.FRAMEBUFFER, w || P), e.enable(e.DEPTH_TEST), e.depthMask(true), e.clear(e.COLOR_BUFFER_BIT | e.DEPTH_BUFFER_BIT), e.useProgram(l), e.bindVertexArray(_), e.bindTexture(e.TEXTURE_2D, I), e.uniform1f(U.time, f), e.uniform1f(U.height, s), e.uniformMatrix4fv(U.model, false, c.modelView), e.uniformMatrix4fv(U.projection, false, c.projection), e.drawElements(e.TRIANGLES, o.indices.length, e.UNSIGNED_SHORT, 0), w && (e.bindFramebuffer(e.READ_FRAMEBUFFER, w), e.bindFramebuffer(e.DRAW_FRAMEBUFFER, P), e.blitFramebuffer(0, 0, t, s, 0, 0, t, s, e.COLOR_BUFFER_BIT, e.NEAREST)), e.bindFramebuffer(e.FRAMEBUFFER, null), e.disable(e.DEPTH_TEST), e.clear(e.COLOR_BUFFER_BIT), e.useProgram(r), e.bindVertexArray(L), e.bindTexture(e.TEXTURE_2D, g), e.drawArrays(e.TRIANGLE_STRIP, 0, 4));
     }, C = () => {
       if (n || e.isContextLost()) return;
       const f = R.getBoundingClientRect();
       if (!f.width || !f.height) return;
-      const M = Math.min(window.devicePixelRatio || 1, 1.25, 1440 / f.width), F = Math.round(f.width * M), A = Math.round(f.height * M);
-      if (c = Q(975 * f.width / f.height, 975), F !== t || A !== s) {
+      const M = Math.min(window.devicePixelRatio || 1, 2), F = Math.round(f.width * M), A = Math.round(f.height * M);
+      if (c = Q(f.width, f.height), F !== t || A !== s) {
         if (t = R.width = F, s = R.height = A, e.bindTexture(e.TEXTURE_2D, g), e.texImage2D(e.TEXTURE_2D, 0, e.RGBA8, F, A, 0, e.RGBA, e.UNSIGNED_BYTE, null), e.bindFramebuffer(e.FRAMEBUFFER, P), e.framebufferTexture2D(e.FRAMEBUFFER, e.COLOR_ATTACHMENT0, e.TEXTURE_2D, g, 0), w) {
           if (e.checkFramebufferStatus(e.FRAMEBUFFER) !== e.FRAMEBUFFER_COMPLETE) throw new Error("Incomplete resolve framebuffer");
           e.bindFramebuffer(e.FRAMEBUFFER, w), e.bindRenderbuffer(e.RENDERBUFFER, S), e.renderbufferStorageMultisample(e.RENDERBUFFER, B, e.RGBA8, F, A), e.framebufferRenderbuffer(e.FRAMEBUFFER, e.COLOR_ATTACHMENT0, e.RENDERBUFFER, S);

@@ -28,7 +28,7 @@ function FlowCanvas({paused}) {
       if(!running()||!renderer)return;
       if(!last)last=now;
       const delta=now-last;
-      if(delta>=32){elapsed+=Math.min(delta,80);last=now;renderer.draw(elapsed)}
+      if(delta>=32){elapsed+=delta;last=now;renderer.draw(elapsed)}
       frame=requestAnimationFrame(tick);
     };
     const sync=()=>{
