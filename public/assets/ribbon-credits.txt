@@ -1,0 +1,4 @@
+Palette image: Stripe public homepage visual asset, palette-light.3c0e6604.webp
+Source: https://b.stripecdn.com/mkt-ssr-statics/assets/_next/static/media/palette-light.3c0e6604.webp
+Geometry, renderer integration and shaders independently implemented for Azeperevod.
+Noise uses mathematical simplex lattice and published xxHash32 constants.
