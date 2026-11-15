@@ -1,0 +1,123 @@
+@import './button-effects.css';
+
+/* Header: larger controls, readable labels, self-hosted country flags. */
+.header-mail{align-items:center;justify-content:center;min-width:42px;min-height:44px;border-radius:10px;transition:background .35s,color .35s}
+.header-mail:hover{background:#e4eff8;color:#1764a0}
+.lang-switch{gap:3px;padding:4px;border-radius:10px}
+.lang-switch a{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:36px;padding:6px 8px;font-size:11px}
+.lang-switch img{width:20px;height:15px;object-fit:contain;filter:drop-shadow(0 1px 1px #0002);flex-shrink:0}
+.menu-toggle svg{width:27px;height:27px}
+.brand-logo-slot{width:44px;height:44px;flex-basis:44px}
+@media(max-width:1180px) and (min-width:901px){.header-in{gap:10px}.nav{gap:11px}.nav a{font-size:11px}.brand-name{font-size:14px}.header-right{gap:7px}.brand-logo-slot{width:30px;flex-basis:30px}.lang-switch a{padding:5px;gap:4px}}
+@media(max-width:550px){.brand-logo-slot{display:none}.header-in{gap:8px}.brand-name{font-size:12px}.header-right{gap:5px}.lang-switch{padding:3px;gap:1px}.lang-switch a{min-width:34px;min-height:39px;flex-direction:column;gap:2px;padding:4px;font-size:9px}.lang-switch img{width:18px;height:13px}.header-mail{display:none}.menu-toggle{min-width:40px;min-height:44px;padding:5px}}
+
+/* Desktop service cards: a scanning beam, corner-fold and directional depth. */
+.services-grid{perspective:1100px}
+.service-card{position:relative;isolation:isolate;transform-style:preserve-3d;transition:transform .7s var(--flow-ease),box-shadow .7s var(--flow-ease),border-color .5s}
+.service-card>h3,.service-card>p,.service-icon,.service-arrow{position:relative;z-index:2}
+.service-card .service-arrow{position:absolute}
+.service-scan{position:absolute;z-index:1;pointer-events:none;left:-20%;top:-80px;width:140%;height:75px;opacity:0;background:linear-gradient(180deg,transparent,#b6d9ee45 42%,#fff9 58%,transparent);transform:rotate(-14deg)}
+.service-card::before{background:radial-gradient(ellipse at 0 0,#d5eafa88,transparent 72%);transition:opacity .7s}
+.service-card::after{content:'';position:absolute;right:-1px;bottom:-1px;width:32px;height:32px;clip-path:polygon(100% 0,100% 100%,0 100%);background:linear-gradient(135deg,#e2eef7,#8bb8da);transform:translate(33px,33px);transition:transform .7s var(--flow-ease);pointer-events:none;z-index:1}
+.service-icon{transition:transform .7s var(--flow-ease),background .6s,box-shadow .6s}
+.service-arrow{transition:background .6s,color .6s,box-shadow .6s}
+@media(hover:hover) and (pointer:fine){
+ .service-card:hover,.service-card:focus-visible{transform:translateY(-6px);box-shadow:0 22px 38px #1648751c;border-color:#7eb2d6}
+ .service-card:hover[data-pose=nw]{transform:translateY(-6px) rotateX(2deg) rotateY(-2deg)}
+ .service-card:hover[data-pose=ne]{transform:translateY(-6px) rotateX(2deg) rotateY(2deg)}
+ .service-card:hover[data-pose=sw]{transform:translateY(-6px) rotateX(-2deg) rotateY(-2deg)}
+ .service-card:hover[data-pose=se]{transform:translateY(-6px) rotateX(-2deg) rotateY(2deg)}
+ .service-card:hover .service-scan,.service-card:focus-visible .service-scan{animation:document-scan 1.2s var(--flow-ease) both}
+ .service-card:hover::after,.service-card:focus-visible::after{transform:translate(0,0)}
+ .service-card:hover .service-icon,.service-card:focus-visible .service-icon{transform:rotate(-9deg) scale(1.07);background:#dcecf8;box-shadow:0 5px 15px #215d8f15}
+ .service-card:hover .service-arrow,.service-card:focus-visible .service-arrow{background:#0c4476;color:#fff;box-shadow:0 0 0 5px #377da414;transform:none}
+ .service-card:hover .service-arrow svg,.service-card:focus-visible .service-arrow svg{animation:arrow-dispatch .75s var(--flow-ease) both}
+}
+@keyframes document-scan{0%{top:-80px;opacity:0}15%{opacity:1}75%{opacity:1}100%{top:110%;opacity:0}}
+@keyframes arrow-dispatch{0%{transform:translate(0,0);opacity:1}40%{transform:translate(11px,-11px);opacity:0}41%{transform:translate(-11px,11px);opacity:0}100%{transform:none;opacity:1}}
+.service-card:focus-visible{border-color:#397ead;box-shadow:0 0 0 3px #76b0d833}
+
+/* Globe: one medium-sized playful object; no directory or statistics panel. */
+.globe-section{padding:32px 0 54px;overflow:hidden}
+.globe-layout{text-align:center}
+.globe-copy h2{margin:0;color:#073563;font-size:clamp(30px,3.2vw,43px)}
+.globe-copy .overline{margin-bottom:10px}
+.globe-copy p{display:flex;gap:9px;align-items:center;justify-content:center;font-size:12px;color:#5a7490;margin:17px 0 0}
+.globe-copy .globe-touch-hint{display:none}
+.globe-playground{position:relative;width:min(100%,470px);margin:14px auto 0;isolation:isolate;aspect-ratio:1}
+.world-globe{display:block;width:100%;height:100%;position:relative;z-index:2;cursor:grab;touch-action:none;border-radius:50%;outline-offset:-20px}
+.world-globe.globe-dragging{cursor:grabbing}
+.globe-orbit{position:absolute;inset:17% -5%;border:1px solid #6e9cbd22;border-radius:50%;transform:rotate(-26deg);pointer-events:none;z-index:0}
+.globe-orbit::after{content:'';position:absolute;inset:-15% 11%;border:1px solid #6e9cbd15;border-radius:50%;transform:rotate(63deg)}
+.globe-ground{position:absolute;width:63%;height:7%;left:18.5%;bottom:1%;border-radius:50%;background:radial-gradient(ellipse,#315e8830,transparent 70%);z-index:0;pointer-events:none}
+.globe-caption{display:flex;justify-content:center;align-items:center;min-height:40px;color:#526c86;font-size:12px;margin:0 auto;max-width:480px}
+.globe-country{display:inline-flex;align-items:center;justify-content:center;gap:10px;background:#ffffffb0;padding:8px 16px;border:1px solid #d0e1ee;border-radius:30px;color:#164870;font-weight:700;line-height:1.5}
+.globe-country img{object-fit:contain;flex-shrink:0}
+.globe-controls{display:flex;gap:9px;justify-content:center;margin-top:14px}
+.globe-controls button{width:42px;height:42px;display:grid;place-items:center;background:#ffffffb0;border:1px solid #c9dce9;border-radius:50%;color:#245b85;transition:background .4s,transform .4s}
+.globe-controls button:hover{background:#dcecf7;transform:translateY(-2px)}
+@media(max-width:550px){.globe-section{padding:24px 0 38px}.globe-playground{width:min(100%,350px);margin-top:8px}.globe-copy .globe-desktop-hint{display:none}.globe-copy .globe-touch-hint{display:flex}.globe-copy p{font-size:11px}.globe-caption{font-size:11px;min-height:46px}.globe-controls button{width:44px;height:44px}}
+
+/* Why choose me: a quiet engraved pattern and individual blue light panels. */
+.why-wrap{position:relative;isolation:isolate;padding:34px 0 0}
+.why-wrap::before{content:'';position:absolute;z-index:-1;inset:-20px -45px -35px;background:radial-gradient(ellipse at 12% 15%,#b8d4eb38,transparent 60%),repeating-linear-gradient(125deg,transparent 0 42px,#628eaf09 42px 43px,transparent 43px 84px);mask-image:linear-gradient(transparent,#000 15%,#000 85%,transparent);pointer-events:none}
+.why-grid{border-color:#bfd3e3;border-radius:15px;overflow:hidden;background:#ffffff20}
+.why-card{position:relative;isolation:isolate;transition:background .65s,box-shadow .65s}
+.why-card::before{content:'';position:absolute;inset:0;z-index:-1;background:linear-gradient(145deg,#ffffffbd,#d1e5f36b);opacity:0;transition:opacity .65s}
+.why-card::after{content:'';position:absolute;left:0;top:0;height:3px;width:100%;background:linear-gradient(90deg,#2777ad,#a6cfe9);transform:scaleX(0);transform-origin:left;transition:transform .75s var(--flow-ease)}
+.why-card-head svg{transition:transform .65s var(--flow-ease),color .6s}
+.why-count{transition:color .6s}
+.why-card:hover{background:#ffffff40;box-shadow:inset 0 0 30px #d1e5f333}
+.why-card:hover::before{opacity:1}.why-card:hover::after{transform:scaleX(1)}
+.why-card:hover .why-card-head svg{transform:translateY(-3px) rotate(-8deg);color:#1978b5}
+.why-card:hover .why-count{color:#246b9b}
+.why-card h3,.why-card p{position:relative;z-index:1}
+@media(max-width:550px){.why-wrap{padding-top:16px}.why-card{background:#ffffff30}.why-card::after{transform:scaleX(.15)}.why-wrap::before{inset:-10px -10px}}
+
+/* Slower ambient motion throughout; interaction remains responsive. */
+.flag-track{animation-duration:1715.3s}
+@media(max-width:550px){.flag-track{animation-duration:1778.6s}}
+@media(prefers-reduced-motion:reduce){
+ .service-scan{display:none}.service-card:hover,.service-card:hover[data-pose],.service-card:focus-visible,.service-card:hover .service-icon,.service-card:focus-visible .service-icon{transform:none}
+ .service-card:hover .service-arrow svg,.service-card:focus-visible .service-arrow svg{animation:none}
+ .why-card:hover .why-card-head svg,.globe-controls button:hover{transform:none}
+}
+
+/* Revision: richer atlas, larger navigation, stable hover surfaces. */
+.header .nav a{font-size:15px;min-height:44px;display:flex;align-items:center}
+.header .nav{gap:20px}
+.header-in{gap:16px}
+@media(min-width:1101px) and (max-width:1250px){.header .nav{gap:12px}.header .nav a{font-size:14px}.header-in{gap:10px}.brand-logo-slot{display:none}.header-mail{display:none}}
+@media(min-width:901px) and (max-width:1100px){.header .nav{display:none;position:absolute;left:0;right:0;top:100%;background:#fff;padding:16px 30px;flex-direction:column;align-items:stretch;border-bottom:1px solid #dbe7f0}.header .nav.nav-open{display:flex}.menu-toggle{display:flex;align-items:center;justify-content:center}}
+@media(max-width:1100px){.header .nav a{font-size:17px;min-height:46px}}
+.service-card,.why-card{animation:none!important;translate:none!important;transform-style:flat}
+.service-card:hover,.service-card:focus-visible{transform:none!important}
+.service-icon,.service-arrow,.service-arrow svg,.why-card-head svg{pointer-events:none;transform:none!important;animation:none!important}
+.service-card:hover .service-icon,.service-card:focus-visible .service-icon,.service-card:hover .service-arrow,.service-card:hover .service-arrow svg,.why-card:hover .why-card-head svg{transform:none!important;animation:none!important}
+.why-card::before,.why-card::after{pointer-events:none}
+.why-card:hover .why-card-head svg{color:#167c9f;filter:drop-shadow(0 0 6px #69c7d55c)}
+.service-card:hover .service-icon{color:#5367a6;background:#e8e7fb}
+.service-card:hover .service-arrow{background:#325d94}
+.globe-playground::before{content:'';position:absolute;inset:2%;border-radius:50%;background:conic-gradient(from 30deg,#87c9df33,#b5a0ee44,#89d6ca33,#87c9df33);filter:blur(24px);z-index:-1;pointer-events:none}
+.globe-orbit{border-color:#9a99c63b}
+.globe-country{background:#fff;border-color:#c9c2e9;box-shadow:0 5px 24px #485c8c12;font-size:14px}
+@media(max-width:550px){.globe-layout{display:flex;flex-direction:column;align-items:center}.globe-copy{order:0}.globe-caption{order:1;margin-top:15px;min-height:46px}.globe-playground{order:2}.globe-controls{order:3;margin-top:3px}.globe-country{font-size:13px}.globe-playground{margin-top:0}}
+
+/* Natural Earth: clean atmosphere and floating shadow, without atlas rings. */
+.globe-orbit{display:none}
+.globe-playground::before{inset:5%;background:radial-gradient(circle,#8bcbe52b 50%,transparent 72%);filter:blur(12px)}
+.globe-ground{width:69%;left:15.5%;height:8%;background:radial-gradient(ellipse,#22374740,transparent 70%)}
+.globe-credit{font-size:10px;color:#6a7b8b;margin:8px 0 0;line-height:1.5}
+.globe-credit a{text-decoration:underline;text-underline-offset:2px}
+@media(max-width:550px){.globe-credit{order:4;margin-top:14px}}
+
+/* Reserved logo space and bounded zoom; no larger render buffers on zoom. */
+.header .brand-logo-slot{display:grid;width:72px;height:54px;flex:0 0 72px}
+.footer .brand-logo-slot{display:grid;width:96px;height:70px;flex:0 0 96px}
+.header .brand{gap:12px}.footer .brand{gap:18px}
+.globe-controls{flex-wrap:wrap;align-items:center;gap:8px}
+.globe-zoom-value{font-size:11px;font-variant-numeric:tabular-nums;min-width:35px;color:#42627c}
+.globe-controls button:disabled{opacity:.35;cursor:default;transform:none}
+@media(min-width:1101px) and (max-width:1250px){.header .brand-logo-slot{width:52px;flex-basis:52px}.header .nav{gap:10px}.header .brand-name{font-size:14px}}
+@media(max-width:550px){.header .brand-logo-slot{width:42px;height:46px;flex-basis:42px}.header .brand{gap:6px}.header .brand-name{font-size:11px}.header .brand-name small{font-size:5px;letter-spacing:.08em}.globe-controls{gap:5px}.globe-controls button{width:38px;height:44px}.globe-zoom-value{min-width:30px}}
+@media(max-width:380px){.header .brand-logo-slot{width:32px;flex-basis:32px}.header .brand-name{font-size:9px}.header .brand-name small{font-size:4px}.header .lang-switch a{min-width:30px}.header .menu-toggle{min-width:36px}}

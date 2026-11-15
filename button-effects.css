@@ -1,0 +1,14 @@
+/* Clearly visible sweep with real content layers. No negative-z-index highlight. */
+.button>.button-label,.button>svg{position:relative;z-index:2}
+.button::before{z-index:0;inset:0;opacity:1;background:#1768aa;transform:scaleX(0);transform-origin:left;transition:transform .48s var(--flow-ease);border-radius:inherit}
+.hero .outline-button::before{background:#155e9c;opacity:1}
+.gold-button::before{background:#2378b6;opacity:1}
+.button::after{z-index:1;inset:-30% auto -30% -45%;width:32%;border-radius:0;background:linear-gradient(90deg,transparent,#ffffff60,transparent);box-shadow:none;transform:skewX(-22deg) translateX(0);transition:transform .8s var(--flow-ease);pointer-events:none}
+.button:hover::before,.button:focus-visible::before,.button:active::before{transform:scaleX(1)}
+.button:hover::after,.button:focus-visible::after,.button:active::after{transform:skewX(-22deg) translateX(620%)}
+.button,.hero .outline-button{transition:color .25s,transform .35s,box-shadow .35s}
+.hero .outline-button:hover,.hero .outline-button:focus-visible,.hero .outline-button:active{color:#fff;background:#f4f9ff;border-color:#8ab9df;box-shadow:0 0 0 3px #87bde42b,0 12px 26px #052b5338}
+.button:hover svg,.button:focus-visible svg,.button:active svg{transform:translateX(5px);background:#ffffff29}
+.button:active{transform:scale(.98)}
+
+@media(prefers-reduced-motion:reduce){.button::after{display:none}.button:hover svg,.button:focus-visible svg,.button:active svg,.button:active{transform:none}}

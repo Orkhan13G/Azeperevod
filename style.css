@@ -1,0 +1,413 @@
+/* =============================================================
+   1. BRAND COLORS — change these values to refresh the design.
+   Smooth gradients live on SECTIONS, not on the buttons.
+   ============================================================= */
+:root{--navy:#023164;--navy-dark:#001f43;--gold:#d6b36e;--gold-light:#f5e5c3;--ice:#edf3f9;--ink:#173954;--muted:#64758a;--line:#dce6ef;--white:#fff;--radius:18px;--shadow:0 12px 45px rgba(11,39,74,.06)}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:92px}body{margin:0;font-family:"Manrope Variable",Arial,sans-serif;color:var(--ink);background:#fff;font-size:15px;line-height:1.65}button,input,textarea{font:inherit}button{cursor:pointer}a{color:inherit;text-decoration:none}h1,h2,h3,p{margin-top:0}h1,h2,h3{line-height:1.2}h1,h2{font-family:'Playfair Display Variable',Georgia,serif;letter-spacing:-.025em}h2{font-size:clamp(31px,3.4vw,47px)}.container{width:min(1190px,calc(100% - 72px));margin:0 auto}.section-pad{padding:108px 0}.overline{display:block;color:#b58a43;text-transform:uppercase;font-size:11px;letter-spacing:.21em;font-weight:800;margin-bottom:12px}.section-heading h2{margin:0;color:var(--navy)}.heading-flex{display:flex;align-items:end;justify-content:space-between;gap:55px;margin-bottom:34px}.heading-flex>p{max-width:455px;color:var(--muted);margin:0}.button{display:inline-flex;align-items:center;justify-content:center;gap:18px;border-radius:9px;padding:15px 23px;border:1px solid transparent;font-weight:800;transition:transform .24s ease,box-shadow .24s ease,background .24s ease}.button:hover{transform:translateY(-3px);box-shadow:0 12px 24px #001c4033}.gold-button{background:var(--gold);color:#092c50}.gold-button:hover{background:#e5c584}.outline-button{border-color:#aec5dd;color:var(--navy);background:#ffffff99}.outline-button:hover{background:#fff}.text-link{display:inline-flex;align-items:center;gap:10px;font-weight:800;color:var(--navy)}
+/* =============================================================
+   2. HEADER & LANGUAGE SWITCHER
+   ============================================================= */
+.header{height:82px;position:sticky;top:0;z-index:30;background:#ffffffed;backdrop-filter:blur(17px);border-bottom:1px solid #dbe7f0}.header-in,.brand,.nav,.header-right,.lang-switch,.header-cta{display:flex;align-items:center}.header-in{height:100%;justify-content:space-between;gap:23px}.brand{gap:11px;flex-shrink:0}.brand-symbol{font-family:Georgia,serif;color:var(--navy);font-weight:900;font-size:36px;letter-spacing:-.13em;line-height:1}.brand-symbol span{color:var(--gold)}.brand-name{font-family:Georgia,serif;font-size:17px;line-height:1.15;letter-spacing:.025em;font-weight:800;color:var(--navy)}.brand-name small{display:block;font-family:"Manrope Variable",sans-serif;letter-spacing:.2em;font-size:8px;font-weight:800;margin-top:5px;color:#9d824c}.nav{gap:23px}.nav a{font-size:12px;font-weight:700;white-space:nowrap;transition:color .2s}.nav a:hover{color:#a78041}.header-right{gap:15px}.lang-switch{gap:2px;border:1px solid #dbe4ee;border-radius:7px;padding:3px}.lang-switch a{font-size:10px;font-weight:800;padding:5px 6px;color:#6d7c8d;border-radius:4px}.lang-switch a.selected{background:var(--navy);color:#fff}.header-mail{display:flex}.header-cta{white-space:nowrap;background:var(--navy);color:#fff;gap:8px;padding:10px 13px;font-size:11px;font-weight:800;border-radius:8px}.header-cta:hover{background:#164977}.menu-toggle{border:0;background:none;display:none;color:var(--navy)}
+/* =============================================================
+   3. HERO — rich navy fades VERY GRADUALLY into pale blue.
+   The gradient is tall so there is no hard line at the next part.
+   ============================================================= */
+.hero{position:relative;overflow:hidden;background:linear-gradient(180deg,#052e5b 0%,#164777 38%,#6f93b6 73%,#dce9f4 94%,#edf3f9 100%);color:white;padding-top:95px}.hero-inner{position:relative;z-index:2;min-height:490px;display:grid;grid-template-columns:1.15fr .85fr;align-items:center;gap:40px;padding-bottom:72px}.hero-copy{animation:up .85s ease both}.hero-eyebrow{display:flex;align-items:center;gap:12px;font-size:10px;letter-spacing:.19em;font-weight:800;color:#e6d6b6}.eyebrow-line{display:block;width:32px;height:2px;background:var(--gold)}.hero h1{font-size:clamp(47px,5vw,72px);margin:27px 0 22px;max-width:780px}.hero h1 span,.hero h1 strong{display:block}.hero h1 strong{color:var(--gold-light);font-weight:500}.hero-desc{font-size:16px;color:#e9eff8;max-width:545px;line-height:1.9}.hero-actions{display:flex;flex-wrap:wrap;gap:13px;margin-top:32px}.hero-location{display:flex;gap:8px;align-items:center;font-size:12px;letter-spacing:.06em;margin-top:33px;color:#d7e4f3}.hero-art{position:relative;height:370px;animation:up 1s .22s ease both}.hero-art-halo{position:absolute;inset:15px 10px 10px 20px;border-radius:50%;border:1px solid #ffffff52;background:radial-gradient(circle at 30% 35%,#ffeac536,transparent 48%),radial-gradient(circle at 68% 60%,#d4e8f933,transparent 50%);box-shadow:0 0 0 26px #ffffff0c,0 0 0 64px #ffffff08}.hero-seal{position:absolute;top:65px;left:50px;width:148px;height:148px;border-radius:100%;background:#ffffff12;border:1px solid #ffffff55;display:flex;align-items:center;justify-content:center;flex-direction:column;transform:rotate(-12deg)}.hero-seal span{font:600 58px 'Playfair Display Variable',serif;color:#ffefd0}.hero-seal small{font-size:9px;letter-spacing:.3em}.hero-art-card{position:absolute;right:25px;bottom:30px;display:flex;align-items:center;gap:16px;padding:22px 32px;background:#ffffffeb;color:var(--navy);border:1px solid #fff;border-radius:15px;box-shadow:0 20px 50px #001b3f2b;transform:rotate(4deg)}.hero-art-card svg{color:#b99150}.hero-art-card span{font:700 25px/1.1 Georgia,serif;letter-spacing:.02em}.hero-art-card small{display:block;font:800 9px "Manrope Variable",sans-serif;letter-spacing:.18em;margin-top:7px}.hero-orbit{position:absolute;border:1px solid #ffffff1c;border-radius:50%;pointer-events:none}.orbit-one{height:700px;width:700px;right:-170px;top:-260px}.orbit-two{height:400px;width:400px;right:140px;top:80px}.trust-strip{position:relative;z-index:3;background:#ffffffeb;color:var(--navy);border:1px solid #ffffff;display:grid;grid-template-columns:repeat(3,1fr);border-radius:18px;box-shadow:0 15px 35px #05346b18;overflow:hidden;transform:translateY(29px)}.trust-item{display:flex;align-items:center;gap:18px;padding:26px 30px;font-size:12px;font-weight:800}.trust-item:not(:last-child){border-right:1px solid #e5eaf0}.trust-item svg{flex-shrink:0;color:#ac8548}
+/* =============================================================
+   4. SERVICES — match the light end of the hero gradient.
+   ============================================================= */
+.services-section{padding-top:132px;background:linear-gradient(180deg,#edf3f9 0%,#f8fafc 42%,#fff 100%)}.services-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.service-card{position:relative;min-height:224px;padding:27px 24px;border:1px solid #e4ebf1;border-radius:16px;background:#fff;box-shadow:var(--shadow);transition:transform .28s,box-shadow .28s,border .28s}.service-card:hover{transform:translateY(-6px);box-shadow:0 16px 35px #06336317;border-color:#b9cce0}.service-icon,.why-icon{height:49px;width:49px;border-radius:12px;display:flex;align-items:center;justify-content:center;background:#f6f0e4;color:#ad874d}.service-card h3{font-size:15px;color:var(--navy);margin:24px 0 8px}.service-card p{font-size:12px;color:#708094;margin:0;line-height:1.8}.service-arrow{position:absolute;right:17px;top:27px;color:#abc0d3}.legal-feature{margin-top:35px;background:linear-gradient(110deg,#113e6c,#315c83);border-radius:19px;padding:32px 36px;display:flex;align-items:center;gap:25px;color:white}.legal-symbol{color:var(--gold);flex-shrink:0}.legal-feature h3{font:600 26px 'Playfair Display Variable',serif;margin:0 0 7px}.legal-feature p{max-width:710px;font-size:13px;color:#dce9f5;margin:0}.legal-link{margin-left:auto;flex-shrink:0;display:flex;align-items:center;gap:9px;font-weight:800;font-size:12px;color:#f2d49c}
+/* =============================================================
+   5. ABOUT — small background shift to a cooler powder blue.
+   ============================================================= */
+.about-section{background:linear-gradient(180deg,#fff 0%,#f4f7fb 27%,#eaf1f8 100%)}.about-layout{display:grid;grid-template-columns:.85fr 1.15fr;gap:85px;align-items:center}.portrait-card{min-height:430px;border-radius:22px;position:relative;background:linear-gradient(155deg,#c9dbea 0%,#8daeca 44%,#113e6c 100%);overflow:hidden;display:flex;align-items:center;justify-content:center}.portrait-card:before{content:'';position:absolute;inset:45px;border:1px solid #ffffff55;border-radius:220px 220px 20px 20px}.portrait-ring{font:600 123px 'Playfair Display Variable',serif;letter-spacing:-.06em;color:#ffffff88}.portrait-bottom{position:absolute;bottom:0;left:0;right:0;background:#062f5be8;color:#f9f9fa;text-align:center;padding:16px;font-size:12px}.portrait-corner{position:absolute;top:27px;right:28px;color:#fff}.about-role{color:#ab864a;font-weight:800;margin-top:16px}.about-body{line-height:2;font-size:15px;color:#496178}.about-foot{display:flex;gap:12px;align-items:start;background:#ffffffae;padding:15px 17px;border-left:3px solid var(--gold);border-radius:0 10px 10px 0;font-size:12px;color:#60748a;margin:23px 0}.about-foot svg{flex-shrink:0;color:#ae8547}
+/* =============================================================
+   6. PRICING — full old price list, readable on mobile.
+   ============================================================= */
+.price-section{background:linear-gradient(180deg,#eaf1f8 0%,#f7f9fc 18%,#fff 63%,#f7f9fc 100%)}.price-notice{display:flex;align-items:center;gap:10px;margin-bottom:20px;padding:12px 17px;border-radius:9px;background:#f7f0e5;border:1px solid #ebdcc6;color:#80643c;font-size:12px}.price-notice svg{flex-shrink:0}.table-scroll{overflow:auto;border:1px solid #dbe5ef;border-radius:15px;background:white;box-shadow:var(--shadow)}.price-table{width:100%;border-collapse:collapse;min-width:680px}.price-table th{background:#073a6e;color:#fff;text-align:left;font-size:12px;padding:20px 22px}.price-table td{padding:18px 22px;font-size:12px;line-height:1.7;border-bottom:1px solid #e7ecf2}.price-table td:not(:first-child){font-weight:800;color:var(--navy);white-space:nowrap}.price-table tbody tr:nth-child(even){background:#f7f9fc}.price-table tbody tr:last-child td{border:0}.price-table th:first-child{width:57%}.price-details{display:flex;flex-wrap:wrap;gap:15px 35px;margin:18px 0 33px;color:#60758b;font-size:12px}.price-details>div{display:flex;gap:9px;align-items:center}.price-details svg{color:#b58a48}.price-lower{display:grid;grid-template-columns:1fr 1.35fr;gap:19px}.price-side{border:1px solid #dde7f0;border-radius:15px;background:#fff;padding:27px 29px}.price-side h3{font:600 24px 'Playfair Display Variable',serif;color:var(--navy);margin-bottom:17px}.price-line{display:flex;justify-content:space-between;align-items:baseline;gap:20px;padding:11px 0;border-top:1px solid #e7ecf2;font-size:13px}.price-line strong{color:var(--navy);text-align:right;flex-shrink:0}.fine-print{color:#758599;font-size:11px;margin:15px 0 0}
+/* =============================================================
+   7. CLIENTS, BENEFITS, RECOMMENDATIONS — editable from data.js.
+   ============================================================= */
+.clients-section{background:linear-gradient(180deg,#f7f9fc 0%,#fff 25%,#eff4f9 100%)}.clients-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.clients-grid a{background:#fff;border:1px solid #e0e9f0;min-height:83px;border-radius:12px;display:flex;align-items:center;justify-content:space-between;gap:15px;padding:19px;color:#8093a5;transition:transform .2s,color .2s,border .2s}.clients-grid a span{font:600 clamp(13px,1.5vw,18px) Georgia,serif}.clients-grid a svg{opacity:.55;flex-shrink:0}.clients-grid a:hover{transform:translateY(-3px);color:var(--navy);border-color:#b0c7da}.why-wrap{margin-top:100px}.why-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:13px;margin-top:30px}.why-card{padding:24px;background:#fff;border:1px solid #e0e8f0;border-radius:14px}.why-card p{font-size:13px;font-weight:700;margin:20px 0 0}.references{margin-top:90px;display:grid;grid-template-columns:1fr 1.4fr;gap:50px;align-items:center}.references h3{font:600 34px 'Playfair Display Variable',serif;color:var(--navy);margin:0 0 12px}.references p{color:var(--muted);font-size:13px}.letter-gallery{display:flex;gap:11px}.letter-paper{width:20%;min-width:0;aspect-ratio:3/4;border-radius:7px;background:linear-gradient(#fff,#f2f4f7);border:1px solid #dae2ea;box-shadow:0 8px 18px #002e5512;display:flex;align-items:center;justify-content:space-around;flex-direction:column;color:#9aafc0;transition:transform .2s}.letter-paper:hover{transform:translateY(-5px)}.letter-paper small{color:var(--navy);font-weight:800}
+/* =============================================================
+   8. PAYMENT STRIP — no QIWI or YooMoney.
+   ============================================================= */
+.payment-section{padding:62px 0;background:linear-gradient(180deg,#eff4f9,#dce9f5)}.payment-inner{display:flex;align-items:center;justify-content:space-between;gap:40px}.payment-inner h2{font-size:32px;margin:0 0 8px;color:var(--navy)}.payment-inner p{font-size:12px;color:#71869b;max-width:500px;margin:0}.payments-icons{display:flex;flex-wrap:wrap;gap:10px}.payments-icons span{border-radius:9px;padding:14px 17px;background:#fff;border:1px solid #d4e0ec;font-weight:800;font-size:12px;color:#43617c}
+/* =============================================================
+   9. CONTACT — soft blue → deep navy transition.
+   ============================================================= */
+.contact-section{background:linear-gradient(180deg,#dce9f5 0%,#9ab4cd 15%,#315b83 51%,#023164 100%);color:#fff;padding-top:140px;padding-bottom:110px}.contact-layout{display:grid;grid-template-columns:1fr 1fr;gap:90px;align-items:start}.section-heading.light h2{color:#fff}.contact-copy>p{color:#e1edf9;max-width:400px;line-height:1.85}.contact-links{display:grid;gap:18px;margin-top:35px}.contact-links a,.contact-links>span{display:flex;align-items:center;gap:13px;font-size:13px;color:#fff}.contact-links svg{color:#ead0a1}.contact-monogram{font:700 115px Georgia,serif;color:#ffffff16;margin-top:50px;letter-spacing:-.08em}.contact-monogram span{color:#d6b36e55}.form-card{background:#fff;color:var(--navy);border-radius:19px;padding:34px;box-shadow:0 25px 60px #001d3d44}.form-card form{display:grid;gap:19px}.form-card label:not(.form-check){display:grid;gap:7px;font-size:12px;font-weight:800}.form-card input:not([type=checkbox]),.form-card textarea{width:100%;border:1px solid #dbe4ed;background:#f9fbfd;padding:14px 15px;border-radius:8px;outline:none;font-size:13px;resize:vertical;color:var(--ink)}.form-card input:focus,.form-card textarea:focus{border-color:#427eb0;box-shadow:0 0 0 3px #9dc4e330}.form-check{display:flex;gap:10px;align-items:flex-start;font-size:11px;line-height:1.65;color:#65788b}.form-check input{margin-top:3px;accent-color:var(--navy)}.form-submit{border:none;width:100%;margin-top:3px}.form-note{font-size:11px;color:#74869a;margin:0}.form-error{color:#a33131;font-size:12px;margin:0}
+/* =============================================================
+   10. FOOTER, PRIVACY, COOKIE BANNER
+   ============================================================= */
+.footer{background:#001f43;color:#cbdbea;padding:45px 0 21px}.footer .brand-name,.footer .brand-symbol{color:#fff}.footer-main{display:flex;align-items:center;gap:40px}.footer-main p{font-size:12px;margin:0;color:#b4c6da}.back-top{margin-left:auto;display:flex;align-items:center;gap:10px;font-size:12px}.footer-bottom{border-top:1px solid #ffffff23;margin-top:35px;padding-top:20px;display:flex;justify-content:space-between;gap:20px;font-size:11px;color:#8fa6c0}.footer-bottom div{display:flex;gap:20px}.footer-bottom button{background:none;border:0;color:#c1d4e5;padding:0;font-size:11px}.cookie-banner{position:fixed;bottom:20px;left:20px;right:20px;max-width:1040px;margin:auto;z-index:80;background:#fff;border-radius:16px;box-shadow:0 20px 75px #001c3c55;border:1px solid #d7e3ec;padding:21px;display:flex;align-items:center;gap:20px;color:var(--navy)}.cookie-icon{background:#eff4f9;color:#b58a48;border-radius:12px;padding:13px;flex-shrink:0}.cookie-copy{flex:1}.cookie-copy strong{font-size:14px}.cookie-copy p{color:#728498;font-size:11px;margin:4px 0 0}.cookie-checkbox{display:flex;gap:9px;font-size:11px;margin-top:10px}.cookie-actions{display:flex;flex-wrap:wrap;gap:7px}.cookie-actions button{padding:10px 12px;border:1px solid #d9e3ec;border-radius:7px;background:#fff;color:var(--navy);font-weight:800;font-size:11px}.cookie-actions .cookie-accept{background:var(--navy);color:#fff;border-color:var(--navy)}.modal-back{position:fixed;inset:0;background:#001a39a8;z-index:100;display:grid;place-items:center;padding:24px}.modal{background:white;border-radius:15px;color:var(--ink);padding:35px;max-width:520px;position:relative}.modal h2{font-size:30px}.modal p{color:#657b90}.modal-close{position:absolute;right:14px;top:14px;border:0;background:none;color:var(--navy)}
+/* =============================================================
+   11. MOTION — respectful fade-in, never abrupt jumps.
+   ============================================================= */
+@keyframes up{from{opacity:0;transform:translateY(19px)}to{opacity:1;transform:translateY(0)}}.reveal-section{opacity:0;transform:translateY(18px);transition:opacity .85s ease,transform .85s ease}.reveal-section.is-visible{opacity:1;transform:translateY(0)}
+/* =============================================================
+   12. MOBILE & ACCESSIBILITY
+   ============================================================= */
+@media(max-width:1160px){.nav{gap:12px}.nav a{font-size:11px}.header-cta{display:none}.header-in{gap:10px}.about-layout{gap:40px}}
+@media(max-width:900px){.container{width:min(100% - 38px,720px)}.header{height:72px}.header-in{position:relative}.nav{display:none;position:absolute;top:72px;right:-19px;left:-19px;padding:20px;background:white;box-shadow:0 15px 30px #00224425;flex-direction:column;align-items:stretch;gap:0}.nav.nav-open{display:flex}.nav a{padding:12px;border-bottom:1px solid #e8eef3;font-size:13px}.menu-toggle{display:block}.hero{padding-top:65px}.hero-inner{grid-template-columns:1fr;min-height:0;padding-bottom:30px}.hero-art{display:none}.hero h1{font-size:clamp(40px,8vw,68px)}.trust-strip{grid-template-columns:1fr}.trust-item{padding:18px 22px}.trust-item:not(:last-child){border-right:0;border-bottom:1px solid #e6ebef}.heading-flex{display:block}.heading-flex>p{margin-top:17px}.services-grid,.clients-grid,.why-grid{grid-template-columns:repeat(2,1fr)}.about-layout{grid-template-columns:1fr}.portrait-card{min-height:340px}.price-lower{grid-template-columns:1fr}.references{grid-template-columns:1fr;gap:25px}.payment-inner{align-items:start;flex-direction:column}.contact-layout{grid-template-columns:1fr;gap:35px}.contact-monogram{display:none}.section-pad{padding:80px 0}.cookie-banner{align-items:flex-start;flex-wrap:wrap}.cookie-copy{flex-basis:calc(100% - 65px)}.cookie-actions{width:100%}}
+@media(max-width:550px){.container{width:calc(100% - 30px)}.brand-name{font-size:13px}.brand-symbol{font-size:30px}.header-right{gap:7px}.lang-switch a{font-size:9px;padding:4px}.header-mail{display:none}.hero{padding-top:55px}.hero h1{font-size:43px}.hero-eyebrow{font-size:9px;letter-spacing:.08em}.hero-actions{flex-direction:column;align-items:stretch}.hero-actions .button{justify-content:space-between}.services-grid,.clients-grid,.why-grid{grid-template-columns:1fr}.service-card{min-height:190px}.legal-feature{padding:25px;display:block}.legal-feature .legal-symbol{margin-bottom:12px}.legal-link{margin:20px 0 0}.form-card{padding:22px}.footer-main{align-items:flex-start;flex-direction:column;gap:17px}.back-top{margin:0}.footer-bottom{flex-direction:column}.cookie-banner{bottom:10px;left:10px;right:10px;padding:15px}.cookie-actions button{flex:1}.contact-section{padding-top:115px}.letter-gallery{gap:6px}.letter-paper{min-height:85px}.section-pad{padding:70px 0}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;animation:none!important;transition:none!important}.reveal-section{opacity:1;transform:none}}
+
+/* =============================================================
+   13. V3 VISUAL REFINEMENT — seamless editorial page
+   Keep section edges matched: avoid visible bands between blocks.
+   ============================================================= */
+:root{--ease-premium:cubic-bezier(.22,1,.36,1);--navy:#063363;--gold:#c9a364}
+/* Sections blend at their boundaries, with layered light rather than bands. */
+main{background:#edf3f9;overflow:clip}
+.hero{background:radial-gradient(ellipse 70% 60% at 80% 21%,rgba(97,140,182,.30) 0%,transparent 100%),linear-gradient(180deg,#062b53 0%,#174977 39%,#93b0cb 78%,#edf3f9 100%);padding-bottom:74px}
+.hero-inner{min-height:530px}
+.hero h1{line-height:1.1;text-wrap:balance}
+.hero-location{margin-bottom:22px}
+.trust-strip{transform:none;margin-top:12px;margin-bottom:0;box-shadow:0 16px 55px rgba(12,49,84,.12);border:1px solid rgba(255,255,255,.8);backdrop-filter:blur(20px);background:rgba(255,255,255,.92)}
+.services-section{padding-top:100px;background:radial-gradient(ellipse 75% 42% at 100% 38%,rgba(255,255,255,.78),transparent 90%),linear-gradient(180deg,#edf3f9 0%,#f8fafc 60%,#fff 100%)}
+.about-section{background:linear-gradient(180deg,#fff 0%,#f6f9fc 47%,#edf3f9 100%)}
+.price-section{background:linear-gradient(180deg,#edf3f9 0%,#f7fafd 26%,#fff 60%,#f7f9fc 100%)}
+.clients-section{background:linear-gradient(180deg,#f7f9fc 0%,#fff 30%,#eff4f9 100%)}
+.payment-section{background:linear-gradient(180deg,#eff4f9 0%,#e5edf5 55%,#dce9f5 100%)}
+.contact-section{background:radial-gradient(ellipse 100% 45% at 80% 70%,rgba(77,116,155,.18),transparent 85%),linear-gradient(180deg,#dce9f5 0%,#bdd0e2 15%,#6288ae 44%,#164775 74%,#063363 100%)}
+/* Action buttons: understated gold with an animated arrow capsule. */
+.button,.header-cta,.legal-link,.text-link,.back-top{position:relative;isolation:isolate;overflow:hidden;transition:transform .5s var(--ease-premium),box-shadow .5s var(--ease-premium),border-color .35s,color .35s,background .35s}
+.button{border-radius:12px;min-height:53px;gap:25px;padding:12px 16px 12px 23px;letter-spacing:.005em}
+.button svg{width:32px;height:32px;padding:8px;border-radius:9px;background:rgba(3,38,73,.10);transition:transform .45s var(--ease-premium),background .35s}
+.button:hover svg,.header-cta:hover svg{transform:translate(2px,-2px)}
+.button:focus-visible,.header-cta:focus-visible,.service-card:focus-visible,.clients-grid a:focus-visible{outline:3px solid #bf9450;outline-offset:4px}
+.gold-button{background:#d4b071;color:#092f58;box-shadow:0 10px 26px rgba(0,36,75,.12)}
+.gold-button:hover{background:#e0bf84;box-shadow:0 16px 36px rgba(5,38,80,.2);transform:translateY(-4px)}
+.outline-button{border:1px solid rgba(20,69,115,.25);background:rgba(255,255,255,.84);color:#073662;backdrop-filter:blur(8px)}
+.outline-button:hover{border-color:#ac8749;transform:translateY(-4px)}
+.header-cta{border-radius:11px;padding:12px 16px;box-shadow:0 6px 18px #0e3b6b20}
+.header-cta:hover{background:#174d80;box-shadow:0 12px 27px #0e3b6b36;transform:translateY(-2px)}
+/* Elegant service interaction: soft gold outline and rising arrow. */
+.service-card{border-radius:19px;overflow:hidden;transition:transform .5s var(--ease-premium),box-shadow .5s var(--ease-premium),border-color .5s}
+.service-card:before{content:'';position:absolute;inset:0;background:linear-gradient(145deg,rgba(218,190,138,.16),transparent 54%);opacity:0;transition:opacity .5s;pointer-events:none}
+.service-card:hover:before{opacity:1}
+.service-card:hover{transform:translateY(-8px);border-color:#d1b88e;box-shadow:0 26px 65px rgba(5,45,88,.11)}
+.service-arrow{top:19px;right:19px;display:grid;place-items:center;width:32px;height:32px;border:1px solid #d8e5f0;border-radius:50%;color:#52799c;transition:background .3s,color .3s,transform .45s var(--ease-premium)}
+.service-card:hover .service-arrow{transform:rotate(45deg);background:#073662;color:#fff}
+.legal-link{padding:12px 17px;border:1px solid #dbbd86aa;border-radius:30px}
+.legal-link:hover{background:#fff;color:#0b3a65;transform:translateY(-3px)}
+/* Logo gallery: original logo images, monochrome in rest state; full-color hover. */
+.clients-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.clients-grid a{position:relative;min-height:112px;padding:22px 25px;justify-content:center;border:1px solid #e1eaf1;background:rgba(255,255,255,.75);border-radius:16px;box-shadow:0 6px 30px rgba(9,43,78,.025);overflow:hidden;transition:transform .5s var(--ease-premium),border-color .4s,background .4s,box-shadow .4s}
+.clients-grid a:before{content:'';position:absolute;bottom:0;left:18%;right:18%;height:2px;background:#c6a16a;transform:scaleX(0);transition:transform .5s var(--ease-premium)}
+.clients-grid a:hover{transform:translateY(-6px);border-color:#c6d4e0;background:#fff;box-shadow:0 18px 40px rgba(9,43,78,.09)}
+.clients-grid a:hover:before{transform:scaleX(1)}
+.client-logo-shell{display:grid;place-items:center;width:100%;min-width:0;height:61px}
+.client-logo-shell img{display:block;max-width:100%;width:auto;max-height:56px;object-fit:contain;filter:grayscale(1);opacity:.72;transition:filter .5s,opacity .5s,transform .5s var(--ease-premium)}
+.clients-grid a:hover img{filter:grayscale(0);opacity:1;transform:scale(1.06)}
+.client-fallback{text-align:center;line-height:1.2;font-size:17px;color:#526c84;font-family:Georgia,serif;font-weight:700;letter-spacing:.025em}
+.client-visit{position:absolute;right:12px;top:12px;display:grid;place-items:center;opacity:0;transform:translate(-4px,4px);transition:opacity .3s,transform .3s;color:#9f783e}
+.clients-grid a:hover .client-visit{opacity:1;transform:none}
+/* Recommendation thumbnails as real document previews */
+.letter-paper{position:relative;overflow:hidden;filter:grayscale(.5);transition:transform .5s var(--ease-premium),filter .4s,box-shadow .4s}
+.letter-paper:hover{transform:translateY(-8px) rotate(-1deg);filter:grayscale(0);box-shadow:0 18px 35px rgba(3,35,77,.17)}
+.payments-icons span{border-radius:30px;border:1px solid #d5e0eb;background:#ffffffda;padding:14px 22px;transition:transform .3s,border-color .3s,box-shadow .3s}
+.payments-icons span:hover{transform:translateY(-3px);border-color:#ceb381;box-shadow:0 12px 24px #07366212}
+/* Avoid hiding entire sections when animations are delayed or screenshots are taken. */
+.reveal-section{opacity:1;transform:none;transition:none}
+.reveal-section.is-visible{opacity:1;transform:none}
+@media(max-width:900px){.hero{padding-bottom:40px}.clients-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:550px){.clients-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.clients-grid a{min-height:95px;padding:15px}.client-fallback{font-size:13px}.hero-inner{min-height:0}.trust-strip{margin-top:15px}.button{width:100%;justify-content:space-between}}
+@media(prefers-reduced-motion:reduce){.client-logo-shell img,.service-card,.button,.header-cta{transition:none!important}}
+
+/* =============================================================
+   14. V4 — MOBILE PRICE LIST, COOLER ACCENTS, REFINED DETAILS
+   These overrides keep pricing easy to read on small screens.
+   ============================================================= */
+:root{--gold:#9bb4ce;--gold-light:#e6f0f9;--ease-premium:cubic-bezier(.22,1,.36,1)}
+/* Calm blue tonal accents, not yellow or metallic gradients. */
+.service-icon,.why-icon,.cookie-icon{background:#eaf1f7;color:#365d83}
+.service-card:before{background:linear-gradient(145deg,rgba(196,218,236,.28),transparent 58%)}
+.service-card:hover{border-color:#99b8d1}
+.service-card{box-shadow:0 16px 45px rgba(23,61,96,.035)}
+.service-card:hover{box-shadow:0 23px 55px rgba(23,61,96,.105)}
+.service-arrow{border-color:#cbddea;color:#35628b}
+.why-grid{gap:0;border-top:1px solid #cbdbea;border-bottom:1px solid #cbdbea;margin-top:36px}
+.why-card{border:0;border-radius:0;background:transparent;min-height:206px;padding:28px 27px;display:flex;flex-direction:column;justify-content:space-between;transition:background .3s ease}
+.why-card:not(:last-child){border-right:1px solid #d7e2eb}
+.why-card:hover{background:rgba(255,255,255,.52)}
+.why-card-head{display:flex;align-items:center;justify-content:space-between;color:#2e5b84}
+.why-count{color:#99aec2;font:500 13px "Manrope Variable",sans-serif;letter-spacing:.14em}
+.why-card p{font-size:15px;line-height:1.65;color:#173954;font-weight:600;max-width:225px;margin:22px 0 0}
+/* Seamless near-white page flow; only transitions between similar hues. */
+.services-section{background:linear-gradient(180deg,#edf3f9 0%,#f4f8fb 40%,#fff 100%)}
+.about-section{background:linear-gradient(180deg,#fff 0%,#f6f9fc 58%,#eff5fa 100%)}
+.price-section{background:linear-gradient(180deg,#eff5fa 0%,#f8fafc 42%,#fff 100%)}
+.clients-section{background:linear-gradient(180deg,#fff 0%,#f8fbfd 58%,#f0f6fb 100%)}
+.payment-section{background:linear-gradient(180deg,#f0f6fb,#e7f0f8)}
+.contact-section{background:linear-gradient(180deg,#e7f0f8 0%,#cbddea 16%,#6389ae 40%,#164775 69%,#023164 100%)}
+/* Keep strong calls to action solid navy and let the arrow do the work. */
+.gold-button{background:#0b447a!important;color:#fff!important;box-shadow:0 12px 25px rgba(3,49,100,.15)}
+.gold-button:hover{background:#185d98!important;box-shadow:0 17px 35px rgba(3,49,100,.22)}
+.hero h1 strong{color:#fff}
+.hero-eyebrow{color:#d4e6f5}
+.eyebrow-line{background:#c1d5e7}
+.hero-seal span{color:#fff}
+.legal-symbol,.about-foot svg,.price-details svg,.contact-links svg{color:#a8c6df}
+.about-role,.overline{color:#456f96}
+.about-foot{border-left-color:#8cacc8}
+.price-mobile-list{display:none}
+@media(max-width:700px){
+  /* Replace the sideways-scrolling desktop table with full-width entries. */
+  .table-scroll{display:none}
+  .price-mobile-list{display:grid;gap:12px}
+  .price-mobile-item{position:relative;padding:20px;border:1px solid #dbe7f0;border-radius:16px;background:rgba(255,255,255,.92);box-shadow:0 10px 28px rgba(6,40,80,.035)}
+  .price-mobile-index{font-size:10px;color:#7797b3;letter-spacing:.14em;font-weight:800}
+  .price-mobile-item h3{font:700 14px/1.55 "Manrope Variable",sans-serif;color:#103c65;margin:9px 0 19px;overflow-wrap:anywhere}
+  .price-mobile-values{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));border-top:1px solid #e5edf3;padding-top:15px;gap:12px}
+  .price-mobile-values>div{display:flex;flex-direction:column;gap:7px;min-width:0}
+  .price-mobile-values>div+div{border-left:1px solid #e5edf3;padding-left:13px}
+  .price-mobile-values span{font-size:10px;color:#687f94;line-height:1.5}
+  .price-mobile-values strong{font-size:13px;color:#063363;white-space:nowrap}
+  .why-grid{display:grid;grid-template-columns:1fr 1fr}
+  .why-card{min-height:185px;padding:21px 15px}
+  .why-card:nth-child(2){border-right:0}
+  .why-card:nth-child(-n+2){border-bottom:1px solid #d7e2eb}
+  .why-card p{font-size:12px;line-height:1.65}
+}
+@media(max-width:380px){.price-mobile-values strong{font-size:12px}.why-grid{grid-template-columns:1fr}.why-card{min-height:135px;border-right:0!important;border-bottom:1px solid #d7e2eb!important}}
+
+/* ============================================================
+   15. FINAL MOTION SYSTEM — restrained editorial movement
+   Simple rules: transform and opacity only; never hide text while loading.
+   ============================================================ */
+:root{--motion-ease:cubic-bezier(.22,1,.36,1)}
+html{scroll-padding-top:88px}
+.skip-link{position:fixed;z-index:99999;top:8px;left:12px;background:white;color:#063363;padding:12px 16px;border-radius:8px;transform:translateY(-160%)}
+.skip-link:focus{transform:translateY(0)}
+/* A single very long palette transition removes visible color bands. */
+main{background:linear-gradient(180deg,#d7e7f3 0%,#edf3f9 14%,#f9fbfd 35%,#fff 53%,#edf3f9 78%,#d4e3f1 92%,#d4e3f1 100%)}
+main .services-section,main .about-section,main .price-section,main .clients-section,main .payment-section{background:transparent}
+.services-section{position:relative}
+.service-card{isolation:isolate;transition:transform .55s var(--motion-ease), box-shadow .55s var(--motion-ease),border-color .4s ease}
+.service-card:before{background:radial-gradient(circle at 92% 9%,rgba(68,116,161,.12),transparent 56%)}
+.service-card:hover{transform:translateY(-5px)}
+.service-card:hover .service-arrow{transform:translate(2px,-2px) rotate(0deg)}
+.legal-feature{background:linear-gradient(120deg,#082f58,#184e7c)}
+/* Portrait uses an actual replaceable file; initials only if image fails. */
+.portrait-card{background:linear-gradient(160deg,#163e66,#7194b5)}
+.portrait-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 27%;z-index:2}
+.portrait-card:not(.portrait-no-photo) .portrait-ring{display:none}
+.portrait-card .portrait-corner{z-index:3}
+/* Desktop: reveal small elements, not whole sections. */
+@media (hover:hover) and (min-width:701px) and (prefers-reduced-motion:no-preference){
+ .service-card,.why-card,.heading-flex,.portrait-card,.legal-feature,.references{animation:soft-arrive .8s var(--motion-ease) both;animation-timeline:view();animation-range:entry 0% entry 30%}
+}
+@keyframes soft-arrive{from{opacity:.78;translate:0 16px}to{opacity:1;translate:0 0}}
+/* Mobile: quiet tactile feedback instead of dramatic scroll movements. */
+@media(max-width:700px){
+ .service-card{min-height:170px}
+ .service-card:active,.price-mobile-item:active{transform:scale(.992);transition:transform .2s ease}
+ .why-card{min-height:140px}
+ .hero h1{letter-spacing:-.028em}
+ .portrait-card{min-height:380px}
+ .menu-toggle{min-width:44px;min-height:44px}
+ .nav{z-index:40}
+ .nav.nav-open{animation:menu-enter .25s var(--motion-ease) both}
+ @keyframes menu-enter{from{opacity:.4;translate:0 -8px}to{opacity:1;translate:0 0}}
+}
+@media(prefers-reduced-motion:reduce){.service-card,.why-card,.heading-flex,.portrait-card,.legal-feature,.references{animation:none!important;translate:none!important}.nav.nav-open{animation:none!important}}
+/* Header + controls: comfortable keyboard targets and visible focus. */
+a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid #4b83b4!important;outline-offset:3px}
+@media(max-width:700px){.lang-switch a{min-width:29px;min-height:34px;display:inline-flex;align-items:center;justify-content:center}.cookie-actions button{min-height:42px}}
+
+/* ============================================================
+   16. OCTOBER 2026 BRIEF — targeted content and responsive polish.
+   Keep v5 layout and cool blue section transitions intact.
+   ============================================================ */
+.about-body p{margin:0 0 1.15em;line-height:1.85}
+.about-body p:last-child{margin-bottom:0}
+.legal-stamp{display:grid;place-items:center;min-width:78px;min-height:78px;border:1px solid #98b7d1;border-radius:14px;background:#ffffff12;color:#e8f0f7;transition:transform .25s ease,background .25s ease}
+.legal-stamp:hover,.legal-stamp:focus-visible{transform:translateY(-3px) rotate(-2deg);background:#ffffff22}
+.legal-feature{background:linear-gradient(120deg,#082f58,#17436c);}
+.legal-link{white-space:nowrap}
+.why-wrap{margin-top:0}
+.why-card h3{color:#023164;font-size:17px;margin:15px 0 0}
+.why-card p{font-size:13px;line-height:1.75;font-weight:400;color:#526981;margin-top:12px}
+.payments-icons span{min-width:105px;text-align:center;letter-spacing:.01em}
+.hero-copy h1{max-width:900px}
+@media(max-width:850px){.legal-feature{flex-wrap:wrap}.legal-link{margin-left:0}.why-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:550px){.why-grid{grid-template-columns:1fr}.legal-feature{display:flex;align-items:flex-start}.legal-stamp{min-width:64px;min-height:64px}.legal-link{width:100%;justify-content:space-between}.about-body p{font-size:14px}.payments-icons span{flex:1 1 42%}}
+@media(prefers-reduced-motion:reduce){.legal-stamp{transition:none}.legal-stamp:hover{transform:none}}
+
+
+/* ============================================================
+   17. REFINEMENT PASS — smoother payment/contact transition
+   and stronger editorial presentation for the About section.
+   ============================================================ */
+main{background:linear-gradient(180deg,#d7e7f3 0%,#edf3f9 12%,#f9fbfd 33%,#fff 50%,#f3f8fc 68%,#e3edf5 80%,#cfddea 88%,#89a7c2 95%,#023164 100%)}
+.about-layout{align-items:start}
+.about-copy{position:relative;padding:34px 36px 32px;border:1px solid rgba(140,168,196,.26);border-radius:28px;background:linear-gradient(180deg,rgba(255,255,255,.9),rgba(246,250,252,.78));box-shadow:0 24px 55px rgba(10,41,73,.06);backdrop-filter:blur(4px)}
+.about-copy::before{content:'';position:absolute;left:36px;right:36px;top:0;height:3px;border-radius:999px;background:linear-gradient(90deg,#d6b36e 0%,#efd9aa 25%,rgba(214,179,110,.55) 42%,rgba(2,49,100,.24) 100%)}
+.about-head{margin-bottom:28px}
+.about-rule{width:126px;height:1px;margin:16px 0 18px;background:linear-gradient(90deg,#d6b36e 0%,rgba(214,179,110,.25) 68%,transparent 100%)}
+.about-role{display:inline-flex;align-items:center;gap:10px;color:#6b86a0;font-size:14px;letter-spacing:.08em;text-transform:uppercase;font-weight:800;margin:0}
+.about-facts{display:flex;flex-wrap:wrap;gap:11px;margin-top:18px}
+.about-fact{display:inline-flex;align-items:center;gap:9px;padding:10px 14px;border-radius:999px;border:1px solid rgba(159,181,202,.45);background:#fff;color:#103c65;font-size:12px;font-weight:700;box-shadow:0 10px 24px rgba(7,44,77,.05)}
+.about-fact svg{color:#b78f52}
+.about-body{position:relative;padding-left:18px}
+.about-body::before{content:'';position:absolute;left:0;top:4px;bottom:4px;width:2px;border-radius:2px;background:linear-gradient(180deg,rgba(183,143,82,.85),rgba(2,49,100,.18))}
+.portrait-card{box-shadow:0 30px 60px rgba(11,43,75,.14)}
+.portrait-card::after{content:'';position:absolute;inset:16px;border-radius:20px;border:1px solid rgba(214,179,110,.38);pointer-events:none;z-index:3}
+.portrait-card::before{border-color:rgba(255,255,255,.4)}
+.payment-section{position:relative;padding:58px 0 34px;overflow:hidden}
+.payment-section::before{content:'';position:absolute;inset:auto 0 0 0;height:120px;background:linear-gradient(180deg,rgba(231,240,248,0),rgba(210,225,238,.8) 52%,rgba(191,210,227,.95) 100%);pointer-events:none}
+.payment-inner{position:relative;align-items:flex-start;z-index:1}
+.payments-icons{max-width:720px}
+.payments-icons span{background:rgba(255,255,255,.86);border-color:rgba(189,207,223,.9);box-shadow:0 8px 18px rgba(8,40,73,.04)}
+.payments-icons span:hover{border-color:#c0a168;box-shadow:0 14px 26px rgba(8,40,73,.08)}
+.contact-section{position:relative;margin-top:-1px;padding-top:96px;background:linear-gradient(180deg,rgba(232,241,248,0) 0%,#d5e4f0 8%,#7c9fbe 30%,#245682 58%,#023164 100%)}
+.contact-section::before{content:'';position:absolute;left:0;right:0;top:-88px;height:120px;background:linear-gradient(180deg,rgba(231,240,248,0),rgba(207,223,236,.55) 26%,rgba(154,181,208,.82) 74%,rgba(91,126,165,.96) 100%);pointer-events:none}
+.contact-layout{position:relative;z-index:1;align-items:center}
+.form-card{box-shadow:0 30px 70px rgba(0,29,61,.28)}
+.contact-copy{padding-top:18px}
+.contact-monogram{opacity:.85}
+@media(max-width:900px){.about-copy{padding:28px 26px}.payment-section{padding-bottom:18px}.contact-section{padding-top:78px}.contact-section::before{top:-66px;height:90px}}
+@media(max-width:550px){.about-copy{padding:24px 20px 22px;border-radius:22px}.about-copy::before{left:20px;right:20px}.about-rule{margin:14px 0 16px}.about-facts{gap:9px}.about-fact{font-size:11px;padding:9px 12px}.about-body{padding-left:14px}.payment-section{padding:54px 0 10px}.payment-inner{gap:20px}.payments-icons{gap:12px}.contact-section{padding-top:64px}.contact-copy{padding-top:0}}
+
+
+/* ============================================================
+   18. CORRECTION PASS — remove harsh payment transition,
+   improve contact blend, add Kutafin credential, and fix
+   spacing/composition in the About section.
+   ============================================================ */
+.about-layout{align-items:stretch}
+.portrait-card{height:100%;min-height:640px}
+.about-copy{display:flex;flex-direction:column;min-height:100%;padding-bottom:36px}
+.about-facts{margin-bottom:6px}
+.about-fact{max-width:100%}
+.about-body{flex:1}
+.about-copy .text-link{margin-top:30px;padding-top:2px}
+.payment-section{padding:54px 0 18px;background:transparent}
+.payment-section::before{display:none}
+.payment-inner{padding-bottom:0;align-items:flex-start}
+.contact-section{margin-top:0;padding-top:78px;background:linear-gradient(180deg,#eef4f9 0%,#dde8f1 12%,#a8bfd3 32%,#5e83a6 49%,#255781 69%,#023164 100%)}
+.contact-section::before{display:none}
+.contact-layout{align-items:stretch}
+.contact-copy,.form-card{position:relative}
+.contact-copy{padding-top:10px}
+.contact-copy::after{content:'';position:absolute;inset:auto 0 -1px 0;height:1px;background:linear-gradient(90deg,rgba(255,255,255,.18),rgba(255,255,255,0));display:none}
+@media(max-width:1100px){.portrait-card{min-height:580px}}
+@media(max-width:900px){.portrait-card{min-height:440px}.about-copy{padding-bottom:30px}.payment-section{padding:48px 0 14px}.contact-section{padding-top:68px}}
+@media(max-width:550px){.portrait-card{min-height:360px;height:auto}.about-copy{padding-bottom:24px}.about-copy .text-link{margin-top:24px}.payment-section{padding:44px 0 10px}.contact-section{padding-top:56px}}
+
+/* Targeted portrait, biography and contact corrections. */
+.about-layout{align-items:start}
+.about-copy{background:#fff;backdrop-filter:none;min-height:0}
+.about-copy::before,.about-body::before,.about-rule,
+.portrait-card::before,.portrait-card::after{display:none}
+.about-body{padding-left:0}
+.portrait-card{height:auto;min-height:0;align-self:start;background:#e4edf4}
+.portrait-photo{position:relative;inset:auto;display:block;width:100%;height:auto;aspect-ratio:auto 1529 / 2048;object-fit:contain;object-position:center}
+.portrait-card .portrait-corner{display:none}
+.portrait-no-photo{aspect-ratio:3/4}
+.contact-section{background:linear-gradient(to bottom,transparent calc(100% - 60px),#023164 100%);color:#123d65}
+.contact-copy .section-heading h2{color:#063363}
+.contact-copy>p,.contact-links a,.contact-links>span{color:#294e70}
+.contact-links svg{color:#456f96}
+.contact-monogram{color:#325f8526}
+.contact-monogram span{color:#325f8540}
+
+/* Release fixes: allow grid/flex children and long translated words to shrink. */
+.hero-copy,.hero-inner>*,.about-layout>*,.contact-layout>*,.payment-inner>*{min-width:0}
+.hero h1{overflow-wrap:anywhere;hyphens:auto}
+.hero-eyebrow{overflow-wrap:anywhere}
+.eyebrow-line{flex-shrink:0}
+.brand{min-width:0;flex-shrink:1}
+.brand-logo-slot{display:grid;place-items:center;width:40px;height:40px;flex:0 0 40px}
+.brand-logo-slot img{display:block;max-width:100%;max-height:100%;object-fit:contain}
+.header-right{flex-shrink:0}
+.legal-feature{flex-wrap:wrap}
+.legal-feature>div{min-width:0;flex:1 1 240px}
+.legal-link{white-space:normal}
+.contact-links a,.contact-links>span,.about-fact{overflow-wrap:anywhere}
+.policy-copy{white-space:normal;overflow-wrap:anywhere}
+@media(max-width:900px){
+ .hero-inner,.about-layout,.contact-layout{grid-template-columns:minmax(0,1fr)}
+ .nav{left:-19px;right:-19px;max-height:calc(100dvh - 80px);overflow-y:auto}
+ .portrait-card{width:min(100%,440px);justify-self:center}
+}
+@media(max-width:550px){
+ .header-in{gap:6px}
+ .brand{gap:6px}
+ .brand-logo-slot{width:28px;height:32px;flex-basis:28px}
+ .brand-name{font-size:clamp(9px,2.8vw,13px);overflow-wrap:anywhere}
+ .brand-name small{font-size:6px;letter-spacing:.12em}
+ .header-right{gap:1px}
+ .lang-switch{gap:0;padding:2px}
+ .lang-switch a{min-width:25px;padding:4px 3px}
+ .menu-toggle{padding:6px;min-width:38px}
+ .hero h1{font-size:clamp(28px,8.1vw,43px);line-height:1.15;text-wrap:initial}
+ .hero-eyebrow{font-size:8px;letter-spacing:.05em;gap:9px}
+ .hero-desc{font-size:15px}
+ .nav{left:-15px;right:-15px}
+ .legal-feature{gap:16px;padding:22px}
+ .legal-feature>div{flex-basis:100%}
+ .price-mobile-values strong{white-space:normal}
+ .form-card{padding:20px}
+ .contact-layout{gap:28px}
+ .about-fact{border-radius:16px}
+ .footer-bottom>div{display:flex;flex-wrap:wrap;gap:12px}
+}
+/* Readable secondary copy on pale surfaces. */
+.payment-inner p,.form-note,.form-check{color:#52677f}
+/* Align Why AZEPEREVOD headings and descriptions */
+.why-card {
+  justify-content: flex-start;
+  gap: 18px;
+  min-width: 0;
+}
+
+.why-card h3 {
+  margin: 0;
+  line-height: 1.3;
+  min-height: 3.9em;
+  text-align: left;
+}
+
+.why-card p {
+  margin: 0;
+  max-width: none;
+  text-align: left;
+}
+
+@supports (grid-template-rows: subgrid) {
+  .why-grid {
+    row-gap: 18px;
+  }
+
+  .why-card {
+    display: grid;
+    grid-row: span 3;
+    grid-template-rows: subgrid;
+    row-gap: 18px;
+    align-content: start;
+  }
+
+  .why-card h3 {
+    min-height: 0;
+  }
+}
+
+@media (max-width: 550px) {
+  .why-grid {
+    row-gap: 0;
+  }
+
+  .why-card {
+    display: flex;
+    grid-row: auto;
+    gap: 16px;
+    min-height: 0;
+  }
+
+  .why-card h3 {
+    min-height: 0;
+  }
+}
