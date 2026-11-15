@@ -1,0 +1,11 @@
+Earth imagery: NASA/Goddard Space Flight Center Scientific Visualization Studio.
+Blue Marble Next Generation data: Reto Stockli (NASA/GSFC), NASA Earth Observatory.
+Cloud composite: Climate Prediction Center.
+Source: https://svs.gsfc.nasa.gov/3615/
+Image: https://svs.gsfc.nasa.gov/vis/a000000/a003600/a003615/flat_earth03.jpg
+Original 2048x1024 JPEG, unmodified.
+
+Zoom texture: flat_earth_Largest_still.0330.jpg from the same NASA source, resized from 8192x4096 to 4096x2048 for web delivery.
+
+Ultra zoom texture: original 8192x4096 flat_earth_Largest_still.0330.jpg,
+converted to WebP at original resolution for delivery. NASA/Goddard SVS.

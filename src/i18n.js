@@ -27,3 +27,26 @@ Object.assign(translations.az, {
  privacyBody:'AZEPEREVOD saytını Zaur Bayramov idarə edir. Məlumatlarınızla bağlı suallar üçün info@azeperevod.ru ünvanına yazın.\n\nSorğu forması e-poçt proqramınızda məktub hazırlayır. Adınız, e-poçt ünvanınız və mesajınız sayt serverinə göndərilmir. Məktubu göndərməyə özünüz qərar verirsiniz. Göndərdiyiniz məlumat sorğunuza cavab vermək və xidmətləri müzakirə etmək üçün istifadə olunur. E-poçt provayderiniz də mesajı öz şərtlərinə uyğun emal edir.\n\nUyğun ötürmə üsulu razılaşdırılmadan pasport, tibbi sənəd və digər məxfi materialları göndərməyin.\n\nSaytda analitika və reklam izləyiciləri yoxdur. Şriftlər və şəkillər saytla birlikdə yerləşdirilir. Hostinq provayderi saytın işləməsi və təhlükəsizliyi üçün IP ünvanı kimi texniki sorğu məlumatlarını emal edə bilər. Xarici keçidlər öz məxfilik qaydaları olan saytlara aparır.\n\nTəqdim etdiyiniz məlumatlara çıxış, düzəliş və ya silinmə barədə info@azeperevod.ru ünvanına müraciət edə bilərsiniz. Tətbiq olunan hüquqi öhdəliklər silinmə imkanına təsir edə bilər.',
  mailNotice:'Hazır məktub e-poçt proqramınızda açılır; onu özünüz göndərirsiniz. Proqram açılmasa, birbaşa info@azeperevod.ru ünvanına yazın.'
 });
+
+// Approved redesign brief: headings and professional credentials.
+Object.assign(translations.ru, {
+ servicesTitle:'Услуги', aboutTitle:'Заур Байрамов, основатель переводческого проекта Azeperevod',
+ aboutFacts:['11 лет опыта','LL.M. США','LL.M. МГЮА имени О. Е. Кутафина','Адвокат, член Коллегии адвокатов Азербайджанской Республики'],
+ pricingTitle:'Тарифы', whyTitle:'Почему выбирают меня'
+});
+Object.assign(translations.en, {
+ servicesTitle:'Services', aboutTitle:'Zaur Bayramov, founder of the Azeperevod translation project',
+ aboutFacts:['11 years of experience','LL.M., USA','LL.M., Kutafin Moscow State Law University','Advocate, member of the Azerbaijan Bar Association'],
+ pricingTitle:'Rates', whyTitle:'Why choose me'
+});
+Object.assign(translations.az, {
+ servicesTitle:'Xidmətlər', aboutTitle:'Zaur Bayramov, Azeperevod tərcümə layihəsinin təsisçisi',
+ aboutFacts:['11 il təcrübə','LL.M., ABŞ','LL.M., O. Y. Kutafin adına Moskva Dövlət Hüquq Universiteti','Vəkil, Azərbaycan Respublikası Vəkillər Kollegiyasının üzvü'],
+ pricingTitle:'Tariflər', whyTitle:'Niyə məni seçirlər'
+});
+for (const [language, text] of Object.entries(translations)) {
+ text.whyHeadings[0]={ru:'11 лет опыта',en:'11 years of experience',az:'11 il təcrübə'}[language];
+ text.aboutText=text.aboutText.replace(/Более десяти лет|Больше десяти лет|Более 10 лет/g,'11 лет').replace(/For over ten years|For more than ten years|For over 10 years/gi,'For 11 years').replace(/On ildən artıqdır ki/g,'11 ildir ki');
+ text.privacyBody=text.privacyBody.split('\n\n').filter(paragraph=>!(/Форма запроса|The inquiry form|Sorğu forması/.test(paragraph))).join('\n\n');
+ text.cookieText += {ru:' Выбранный язык запоминается в необходимом cookie на один год. При первом посещении Netlify использует страну по IP для выбора языка.',en:' Your language choice is remembered in an essential cookie for one year. On your first visit, Netlify uses your IP-derived country to select a language.',az:' Seçdiyiniz dil bir il müddətinə zəruri cookie-də saxlanılır. İlk ziyarətdə Netlify dili seçmək üçün IP əsasında ölkəni müəyyən edir.'}[language];
+}

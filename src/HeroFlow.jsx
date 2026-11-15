@@ -30,35 +30,25 @@ function FlowCanvas({paused}) {
     const media = window.matchMedia('(prefers-reduced-motion: reduce)');
     let frame=0, last=0, visible=true, width=0, height=0;
     const draw = () => {
-      const t=clock.current, small=width<650;
+      const t=clock.current;
       ctx.clearRect(0,0,width,height);
-      const glow=ctx.createRadialGradient(width*.86,height*.23,0,width*.86,height*.23,width*.78);
-      glow.addColorStop(0,'#517b9c40');glow.addColorStop(1,'#517b9c00');
-      ctx.fillStyle=glow;ctx.fillRect(0,0,width,height);
-      // Independent but related deformation streams keep the ribbon transforming
-      // instead of reversing a single synchronized "breathing" animation.
-      const flow=t*.32;
-      const center=.75+wander(flow,2)*.14;
-      const tilt=wander(flow*.83,7)*.32;
-      const bend=wander(flow*1.13,11)*.28;
-      const base=small?.27:.25;
-      const widths=[0,1,2,3].map(k=>base*(1+wander(flow*.91+k*.21,19)*.58+wander(flow*1.17,k+31)*.26));
-      const centers=[center-tilt,center-bend-tilt*.35,center+bend+tilt*.35,center+tilt];
-      const y1=.24+wander(flow*.87,43)*.13;
-      const y2=.68+wander(flow*1.07,47)*.14;
-      for(let i=0;i<88;i++) {
-        const u=i/87, offset=u-.5;
-        const x=centers.map((c,k)=>width*(c+offset*widths[k]));
-        const gradient=ctx.createLinearGradient(x[0],0,x[3],height);
-        gradient.addColorStop(0,`hsla(${263-u*88},53%,${32+u*22}%,${small?.42:.66})`);
-        gradient.addColorStop(.52,`hsla(${244-u*69},55%,${38+u*23}%,${small?.5:.78})`);
-        gradient.addColorStop(1,'#91c8ef00');
-        ctx.beginPath();ctx.moveTo(x[0],-height*.12);
-        ctx.bezierCurveTo(x[1],height*y1,x[2],height*y2,x[3],height*1.12);
-        ctx.globalAlpha=Math.min(1,u/.1,(1-u)/.1);
-        ctx.strokeStyle=gradient;ctx.lineWidth=width*(small?.011:.008);
-        ctx.stroke();ctx.globalAlpha=1;
+      const colors=[['#6554f0','#289adb','#72e1e5'],['#b3a2ff','#5369e6','#36b7d4'],['#2c72c2','#7357d8','#a4c5fa']];
+      for(let layer=0;layer<3;layer++) {
+        const drift=Math.sin(t*.44+layer*1.7)*height*.09;
+        const y=height*(.20+layer*.22)+drift;
+        const bend=Math.sin(t*.31+layer)*height*.28;
+        const gradient=ctx.createLinearGradient(0,y,width,height);
+        colors[layer].forEach((color,i)=>gradient.addColorStop(i/2,color));
+        ctx.globalAlpha=.65;
+        ctx.fillStyle=gradient;
+        ctx.beginPath();ctx.moveTo(-width*.2,y);
+        ctx.bezierCurveTo(width*.25,y-height*.5+bend,width*.62,y+height*.62-bend,width*1.2,y-height*.15);
+        ctx.lineTo(width*1.2,y+height*.28);
+        ctx.bezierCurveTo(width*.65,y+height*.85-bend,width*.23,y-height*.28+bend,-width*.2,y+height*.20);
+        ctx.closePath();ctx.fill();
+        ctx.globalAlpha=.25;ctx.strokeStyle='#d4efff';ctx.lineWidth=2;ctx.stroke();
       }
+      ctx.globalAlpha=1;
     };
     const resize=()=>{
       const rect=canvas.getBoundingClientRect();
@@ -72,7 +62,7 @@ function FlowCanvas({paused}) {
       frame=0;
       if(paused||media.matches||!visible||document.hidden)return;
       if(!last)last=now;
-      if(now-last>=32){clock.current+=Math.min(now-last,60)/1440;last=now;draw()}
+      if(now-last>=32){clock.current+=Math.min(now-last,60)/1000;last=now;draw()}
       frame=requestAnimationFrame(tick);
     };
     const sync=()=>{cancelAnimationFrame(frame);last=0;draw();if(!paused&&!media.matches&&visible&&!document.hidden)frame=requestAnimationFrame(tick)};
@@ -105,8 +95,8 @@ export function FlagRibbon({lang}) {
   },[]);
   return <section ref={root} className={`flag-section ${paused||!inView?'flags-paused':''}`} aria-label={text.flags}>
     <div className="container flag-heading"><p>{text.world}</p><button className="motion-toggle" aria-controls="flag-viewport" aria-label={paused?text.play:text.pause} aria-pressed={paused} onClick={()=>setPaused(!paused)}>{paused?<Play size={14}/>:<Pause size={14}/>}</button></div>
-    <div id="flag-viewport" className="flag-viewport" tabIndex={0} role="region" aria-label={text.flags}>
-      <div className="flag-track">{[0,1].map(copyIndex=><ul key={copyIndex} className="flag-group" aria-hidden={copyIndex===1?true:undefined}>{countries.map((country,index)=><li className="flag-item" key={country.code} title={country.labels[lang]||country.name}><img src={`/assets/flags/${country.code}.svg`} alt="" width="48" height="36" loading={index<14&&copyIndex===0?'eager':'lazy'} decoding="async"/><span>{country.labels[lang]||country.name}</span></li>)}</ul>)}</div>
-    </div><p className="flag-note container">{text.note}</p>
+    <div id="flag-viewport" className="flag-viewport" role="region" aria-label={text.flags}>
+      <div className="flag-track">{[0,1].map(copyIndex=><ul key={copyIndex} className="flag-group" aria-hidden={copyIndex===1?true:undefined}>{countries.filter(country=>['az','gb','us','ru','de','fr','tr','it','es','cn','jp','ae','kz','ge','br','in'].includes(country.code)).map((country,index)=><li className="flag-item" key={country.code} title={country.labels[lang]||country.name}><img src={`/assets/flags/${country.code}.svg`} alt="" width="48" height="36" loading={index<14&&copyIndex===0?'eager':'lazy'} decoding="async"/><span>{country.labels[lang]||country.name}</span></li>)}</ul>)}</div>
+    </div>
   </section>;
 }
