@@ -6,6 +6,7 @@ import {contact,prices,paymentMethods,brandLogo} from './data';
 import '@fontsource-variable/manrope';
 import './style.css';
 import {HeroFlow, FlagRibbon} from './HeroFlow';
+import WorldGlobe from './WorldGlobe';
 import './premium.css';
 
 // ============================================================
@@ -90,7 +91,7 @@ function Motion(){useEffect(()=>{
  elements.forEach(el=>observer.observe(el));
  return ()=>observer.disconnect();
 },[]);return null}
-function App(){return <><SEO/><Motion/><a className="skip-link" href="#services">{lang==='ru'?'Перейти к содержимому':lang==='az'?'Məzmuna keç':'Skip to content'}</a><Header/><main><Hero/><Services/><About/><Prices/><Why/><Payments/><Contact/></main><Footer/></>}
+function App(){return <><SEO/><Motion/><a className="skip-link" href="#services">{lang==='ru'?'Перейти к содержимому':lang==='az'?'Məzmuna keç':'Skip to content'}</a><Header/><main><Hero/><Services/><WorldGlobe lang={lang}/><About/><Prices/><Why/><Payments/><Contact/></main><Footer/></>}
 createRoot(document.getElementById('root')).render(<App/>);
 
 //Bismillah

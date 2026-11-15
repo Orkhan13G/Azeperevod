@@ -16,10 +16,12 @@ The Edge Function uses Netlify country data: Azerbaijan → AZ; RU, BY, AM, KZ, 
 
 ## Changes
 
-Centered hero with the original deployed 3D ribbon restored from the supplied ZIP; simplified passive flag strip; larger typography; gradient headings; rectangular service cards; compact legal link with signature hover animation; 11-year experience and updated credentials; integrated surcharge table; highlighted page and discount notes; diagonal two-color benefits grid; compact payment wordmarks; direct contact information without an inquiry form. Updated RU, EN and AZ content and privacy text. The old interactive globe was removed from the page.
+Centered hero with the original deployed 3D ribbon restored from the supplied ZIP; simplified passive flag strip; larger typography; gradient headings; rectangular service cards; compact legal link with signature hover animation; 11-year experience and updated credentials; integrated surcharge table; highlighted page and discount notes; diagonal two-color benefits grid; compact payment wordmarks; direct contact information without an inquiry form. Updated RU, EN and AZ content and privacy text. The interactive globe is restored below Services, with anchored country labels that remain readable at 100–300% zoom. Click or tap to pin a country; zoom centers it, while the label retains a fixed text size. Touch pinch preserves the selection. Globe imagery and map data load only when the globe enters view.
 
 ## Validation
 
 `npm run build` and `node check.mjs` pass. Content rendering checked for all three languages. Edge logic checked for Azerbaijan, CIS countries, international countries, explicit URLs, manual cookie preference, unknown country and crawler behavior.
 
 Browser checks passed at 1280, 768, 390 and 320px widths: no horizontal overflow, centered header flags, compact language labels, readable contacts and legal link. Screenshots were reviewed at desktop and mobile sizes. The recovered WebGL ribbon changes frames during playback, freezes when paused, and retains its matching poster under reduced motion. RU, EN and AZ mobile rendering passed without browser errors. Actual Netlify geolocation still requires production verification. The renderer and palette attribution were recovered from the original deployment; see public/assets/ribbon-credits.txt.
+
+Globe regression verification: desktop and emulated mobile sizes (1280, 390, 320px), pinned labels at all zoom levels, touch pinch, hover exit, keyboard selection/clear, reset, and lazy asset loading passed in Chromium. Real phone hardware was not tested.

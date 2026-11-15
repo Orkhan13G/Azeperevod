@@ -6,7 +6,7 @@ const source=(await fs.readFile('src/main.jsx','utf8')).replace("createRoot(docu
 const compiled=await build({stdin:{contents:source.replace(/import '@fontsource-variable\/[^']+';/g,''),resolveDir:process.cwd()+'/src',loader:'jsx'},bundle:true,platform:'node',format:'esm',packages:'external',loader:{'.css':'empty'},write:false});
 await fs.writeFile('.qa.mjs',compiled.outputFiles[0].text);
 for(const [path,heading] of [['/','Услуги'],['/en/','Services'],['/az/','Xidmətlər']]){
- globalThis.window={location:{pathname:path}};
+ globalThis.window={location:{pathname:path},matchMedia:()=>({matches:false})};
  const {default:App}=await import('./.qa.mjs?lang='+encodeURIComponent(path));
  const html=renderToStaticMarkup(App());
  assert(html.includes(heading));assert(!html.includes('<form'));assert(!html.includes('why-count'));assert(!html.includes('hero-desc'));assert(html.includes('11 '));assert.equal((html.match(/class="surcharge-row"/g)||[]).length,2);assert(html.includes('yuristvbaku.com'));assert(!html.includes('form-card'));
