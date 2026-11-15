@@ -9,70 +9,63 @@ const copy = {
   az: {pause:'Animasiyanı dayandır',play:'Animasiyanı davam etdir',world:'Dil sərhədlərini aşan dünya',note:'Ölkə və ərazi bayraqları. Mövcud dillər qiymətlər bölməsindədir.',flags:'Ölkə və ərazi bayraqları'}
 };
 
-// Smooth, deterministic wandering values: no short repeating timeline or reset.
-// Cubic B-spline blending keeps velocity and acceleration continuous at knots.
-function wander(time, seed) {
-  const n=Math.floor(time), f=time-n, f2=f*f, f3=f2*f;
-  const value=k=>{const v=Math.sin(k*127.1+seed*311.7)*43758.5453;return (v-Math.floor(v))*2-1};
-  return ((1-f)**3*value(n-1)+(3*f3-6*f2+4)*value(n)+
-    (-3*f3+3*f2+3*f+1)*value(n+1)+f3*value(n+2))/6;
-}
-
-// A bounded 2D canvas: no WebGL dependency, no external requests, no DOM writes per frame.
-// The navy CSS background is also the permanent fallback when canvas is unavailable.
+// Restore the original deployed WebGL ribbon, including its palette and geometry.
+// The matching poster remains visible while shaders load or if WebGL is unavailable.
 function FlowCanvas({paused}) {
-  const canvasRef = useRef(null);
-  const clock = useRef(0);
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    const ctx = canvas.getContext('2d', {alpha:true});
-    if (!ctx) return;
-    const media = window.matchMedia('(prefers-reduced-motion: reduce)');
-    let frame=0, last=0, visible=true, width=0, height=0;
-    const draw = () => {
-      const t=clock.current;
-      ctx.clearRect(0,0,width,height);
-      const colors=[['#6554f0','#289adb','#72e1e5'],['#b3a2ff','#5369e6','#36b7d4'],['#2c72c2','#7357d8','#a4c5fa']];
-      for(let layer=0;layer<3;layer++) {
-        const drift=Math.sin(t*.44+layer*1.7)*height*.09;
-        const y=height*(.20+layer*.22)+drift;
-        const bend=Math.sin(t*.31+layer)*height*.28;
-        const gradient=ctx.createLinearGradient(0,y,width,height);
-        colors[layer].forEach((color,i)=>gradient.addColorStop(i/2,color));
-        ctx.globalAlpha=.65;
-        ctx.fillStyle=gradient;
-        ctx.beginPath();ctx.moveTo(-width*.2,y);
-        ctx.bezierCurveTo(width*.25,y-height*.5+bend,width*.62,y+height*.62-bend,width*1.2,y-height*.15);
-        ctx.lineTo(width*1.2,y+height*.28);
-        ctx.bezierCurveTo(width*.65,y+height*.85-bend,width*.23,y-height*.28+bend,-width*.2,y+height*.20);
-        ctx.closePath();ctx.fill();
-        ctx.globalAlpha=.25;ctx.strokeStyle='#d4efff';ctx.lineWidth=2;ctx.stroke();
-      }
-      ctx.globalAlpha=1;
-    };
-    const resize=()=>{
-      const rect=canvas.getBoundingClientRect();
-      width=rect.width;height=rect.height;
-      // Maximum rendering resolution remains modest even on high-density screens.
-      const scale=Math.min(window.devicePixelRatio||1,1.25,1400/Math.max(width,1));
-      canvas.width=Math.round(width*scale);canvas.height=Math.round(height*scale);
-      ctx.setTransform(scale,0,0,scale,0,0);draw();
-    };
-    const tick=(now)=>{
+  const canvasRef=useRef(null);
+  const pausedRef=useRef(paused);
+  const syncRef=useRef(null);
+  const [ready,setReady]=useState(false);
+  pausedRef.current=paused;
+  useEffect(()=>{
+    const canvas=canvasRef.current;
+    const media=window.matchMedia('(prefers-reduced-motion: reduce)');
+    let renderer=null,frame=0,last=0,elapsed=0,visible=true,disposed=false,loading=false,lost=false;
+    let controller=new AbortController();
+    const running=()=>!disposed&&!lost&&!pausedRef.current&&!media.matches&&visible&&!document.hidden;
+    const tick=now=>{
       frame=0;
-      if(paused||media.matches||!visible||document.hidden)return;
+      if(!running()||!renderer)return;
       if(!last)last=now;
-      if(now-last>=32){clock.current+=Math.min(now-last,60)/1000;last=now;draw()}
+      const delta=now-last;
+      if(delta>=32){elapsed+=Math.min(delta,80);last=now;renderer.draw(elapsed)}
       frame=requestAnimationFrame(tick);
     };
-    const sync=()=>{cancelAnimationFrame(frame);last=0;draw();if(!paused&&!media.matches&&visible&&!document.hidden)frame=requestAnimationFrame(tick)};
-    const resizeObserver=new ResizeObserver(resize);resizeObserver.observe(canvas);
-    const observer=new IntersectionObserver(([entry])=>{visible=entry.isIntersecting;sync()});observer.observe(canvas);
-    media.addEventListener('change',sync);document.addEventListener('visibilitychange',sync);
-    resize();sync();
-    return()=>{cancelAnimationFrame(frame);resizeObserver.disconnect();observer.disconnect();media.removeEventListener('change',sync);document.removeEventListener('visibilitychange',sync)};
-  },[paused]);
-  return <canvas className="flow-canvas" ref={canvasRef} aria-hidden="true"/>;
+    const sync=()=>{
+      cancelAnimationFrame(frame);frame=0;last=0;
+      if(renderer&&!lost)renderer.draw(elapsed);
+      if(renderer&&running())frame=requestAnimationFrame(tick);
+    };
+    const start=async()=>{
+      if(renderer||loading||!running())return;
+      loading=true;
+      try{
+        const {createRibbonRenderer}=await import('./RibbonRenderer.js');
+        if(disposed)return;
+        const instance=await createRibbonRenderer(canvas,()=>{if(!disposed)setReady(true)},{signal:controller.signal});
+        if(disposed){instance.dispose();return}
+        renderer=instance;sync();
+      }catch(error){if(error.name!=='AbortError')console.warn('Ribbon animation unavailable; retaining original poster.',error)}
+      finally{loading=false}
+    };
+    const update=()=>{sync();start()};
+    syncRef.current=update;
+    const resize=new ResizeObserver(()=>renderer?.resize());resize.observe(canvas);
+    const observer=new IntersectionObserver(([entry])=>{visible=entry.isIntersecting;update()});observer.observe(canvas);
+    const onLost=event=>{event.preventDefault();lost=true;controller.abort();setReady(false);renderer?.dispose();renderer=null;sync()};
+    const onRestored=()=>{lost=false;controller=new AbortController();start()};
+    canvas.addEventListener('webglcontextlost',onLost);
+    canvas.addEventListener('webglcontextrestored',onRestored);
+    media.addEventListener('change',update);document.addEventListener('visibilitychange',update);
+    start();
+    return()=>{
+      disposed=true;controller.abort();cancelAnimationFrame(frame);renderer?.dispose();resize.disconnect();observer.disconnect();syncRef.current=null;
+      canvas.removeEventListener('webglcontextlost',onLost);canvas.removeEventListener('webglcontextrestored',onRestored);
+      media.removeEventListener('change',update);document.removeEventListener('visibilitychange',update);
+    };
+  },[]);
+  useEffect(()=>{syncRef.current?.()},[paused]);
+  return <div className={`ribbon-surface${ready?' ribbon-ready':''}`}><img className="ribbon-poster" src="/assets/ribbon-poster.webp" width="1392" height="975" alt="" aria-hidden="true" fetchPriority="high"/><canvas className="flow-canvas" ref={canvasRef} aria-hidden="true"/></div>;
 }
 
 export function HeroFlow({lang}) {

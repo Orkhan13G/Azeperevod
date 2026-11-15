@@ -16,10 +16,10 @@ The Edge Function uses Netlify country data: Azerbaijan → AZ; RU, BY, AM, KZ, 
 
 ## Changes
 
-Centered hero with original flowing gradient ribbons inspired by the brief; simplified passive flag strip; larger typography; gradient headings; rectangular service cards; compact legal link with signature hover animation; 11-year experience and updated credentials; integrated surcharge table; highlighted page and discount notes; diagonal two-color benefits grid; compact payment wordmarks; direct contact information without an inquiry form. Updated RU, EN and AZ content and privacy text. The old interactive globe was removed from the page.
+Centered hero with the original deployed 3D ribbon restored from the supplied ZIP; simplified passive flag strip; larger typography; gradient headings; rectangular service cards; compact legal link with signature hover animation; 11-year experience and updated credentials; integrated surcharge table; highlighted page and discount notes; diagonal two-color benefits grid; compact payment wordmarks; direct contact information without an inquiry form. Updated RU, EN and AZ content and privacy text. The old interactive globe was removed from the page.
 
 ## Validation
 
 `npm run build` and `node check.mjs` pass. Content rendering checked for all three languages. Edge logic checked for Azerbaijan, CIS countries, international countries, explicit URLs, manual cookie preference, unknown country and crawler behavior.
 
-Browser screenshots and animation performance have not been checked in this environment. Test desktop/mobile rendering and actual Netlify geolocation on a deploy preview before replacing production. The animation is an original implementation, not an exact reproduction of Stripe's proprietary visuals. The live Netlify website has not been modified.
+Browser checks passed at 1280, 768, 390 and 320px widths: no horizontal overflow, centered header flags, compact language labels, readable contacts and legal link. Screenshots were reviewed at desktop and mobile sizes. The recovered WebGL ribbon changes frames during playback, freezes when paused, and retains its matching poster under reduced motion. RU, EN and AZ mobile rendering passed without browser errors. Actual Netlify geolocation still requires production verification. The renderer and palette attribution were recovered from the original deployment; see public/assets/ribbon-credits.txt.

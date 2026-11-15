@@ -23,3 +23,42 @@ main .services-section{background:linear-gradient(#edf4fd,#fff 300px);padding-to
 @media(max-width:480px){.container{width:calc(100% - 32px)}.hero .hero-copy h1{font-size:37px}.hero{min-height:450px}.services-grid{grid-template-columns:1fr}.service-card{min-height:210px;padding:28px}.service-card h3{font-size:24px}.service-card p{font-size:17px}.legal-feature{padding:20px;gap:12px}.legal-signature{width:76px;flex-basis:76px}.legal-feature h3{font-size:21px}.why-card{padding:20px 16px}.why-card h3{font-size:20px}.why-card p{font-size:16px}.flag-heading p{font-size:12px}.payment-inner h2{font-size:24px}.payments-icons span{font-size:15px}.price-table{min-width:0;table-layout:fixed}.price-table th,.price-table td{padding:14px 9px;font-size:14px}.price-table td:not(:first-child){font-size:15px}.price-table th:first-child,.price-table td:first-child{width:48%}.contact-copy .section-heading h2{font-size:36px}}
 @media(prefers-reduced-motion:reduce){.flag-track{animation:none!important}.flag-viewport{overflow-x:auto}.signature-stroke{stroke-dashoffset:0}.legal-feature:hover .signature-pen{animation:none}.service-card:hover{transform:none}.flag-group[aria-hidden=true]{display:none}}
 .payments-icons .payment-0{color:#16854a}.payments-icons .payment-1{color:#24272c;display:inline-flex;align-items:center;gap:7px}.payment-1::before{content:'';width:30px;height:20px;background:radial-gradient(circle at 10px 10px,#e84733 0 9px,transparent 10px),radial-gradient(circle at 20px 10px,#efa82b 0 9px,transparent 10px);flex-shrink:0}.payments-icons .payment-2{font-style:italic;color:#213a85}.payments-icons .payment-3{color:#6752a3}.payments-icons .payment-4{color:#793dd0}.payments-icons .payment-5{color:#292b30;background:#ffdf68;border-color:#ffdf68}
+/* Restore the existing ribbon and keep its original light palette. */
+.hero{background:#fff;color:#173954;min-height:560px;padding:110px 0 120px}
+.hero .hero-flow{opacity:1;mask-image:none}
+.hero .ribbon-surface{position:absolute;inset:0 auto 0 18%;width:110%;height:100%;pointer-events:none}
+.hero .ribbon-poster,.hero .flow-canvas{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;filter:none}
+.hero .flow-canvas{opacity:0}
+.hero .ribbon-ready .flow-canvas{opacity:1}
+.hero .ribbon-ready .ribbon-poster{opacity:0}
+.hero .flow-shade{background:linear-gradient(90deg,#ffffffd9 0%,#ffffffb8 35%,#ffffff85 56%,#ffffff00 82%)}
+.hero .hero-copy h1{font-size:clamp(34px,4.25vw,58px);line-height:1.2;font-weight:750;max-width:980px;color:#153757;text-shadow:none;letter-spacing:-.035em;overflow-wrap:normal;hyphens:none}
+.hero .hero-copy h1 strong{font-size:inherit;font-weight:750;color:#153757;margin-top:.12em}
+.hero .hero-motion-toggle{color:#173954;background:#ffffffd9;border-color:#b4c4d9;top:24px;right:24px}
+/* Flag and label form one centered unit rather than inline baseline content. */
+.header .lang-switch{display:flex;align-items:center;justify-content:center;gap:3px;padding:4px;flex-shrink:0}
+.header .lang-switch a{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:34px;min-width:54px;padding:7px 8px;font-size:11px;line-height:1;font-weight:750;white-space:nowrap}
+.header .lang-switch a img{display:block;width:20px;height:15px;min-width:20px;object-fit:cover;border-radius:2px;margin:0;flex-shrink:0}
+.header .lang-switch a span{display:block;font-size:11px;line-height:1}
+.header .brand-name{font-size:20px}.brand-logo-slot:empty{display:none}
+.header .header-right{gap:12px}.header .header-in{gap:20px}.header .nav{gap:20px}
+.header .nav a{font-size:14px}
+/* Explicit contrast overrides replace the older pale-contact-section rules. */
+.contact-section .contact-links > a,.contact-section .contact-links > span{color:#f5f8ff;font-size:clamp(18px,1.65vw,23px);font-weight:600;line-height:1.55}
+.contact-section .contact-links svg{color:#bbd7f5}
+.contact-section .contact-links > a:hover{color:#fff;text-decoration:underline;text-underline-offset:5px}
+.contact-section .contact-links > a:focus-visible{outline:2px solid #d6eaff;outline-offset:6px;border-radius:3px}
+.contact-section .contact-copy .section-heading h2{color:#fff}
+.legal-feature{flex-wrap:nowrap;align-items:center}
+.legal-feature > div{flex:1 1 auto;min-width:0}
+.legal-feature h3{font-family:'Manrope Variable',Arial,sans-serif;font-weight:750;font-size:22px;line-height:1.35;color:#213d67}
+.legal-feature .legal-link{color:#283f7d;border-color:#b2bed9;background:#fff;padding:10px 14px;line-height:1.4;font-size:14px;margin:0;max-width:100%;width:auto}
+.legal-feature .legal-link svg{flex-shrink:0}
+.flag-section .flag-item{align-items:center;justify-content:center;text-align:center}
+.flag-section .flag-item img{display:block;margin-inline:auto}
+@media(max-width:1100px) and (min-width:901px){.header .nav{gap:12px}.header .nav a{font-size:12px}.header .lang-switch a{min-width:48px;padding:7px 5px}.header .brand-name{font-size:18px}.header .header-in{gap:12px}}
+@media(max-width:900px){.hero{min-height:490px;padding:100px 0}.hero .hero-copy h1{font-size:clamp(34px,4.6vw,46px)}.hero .ribbon-surface{left:12%;width:125%}.header .nav a{font-size:15px}}
+@media(max-width:550px){.hero{min-height:440px;padding:82px 0 94px}.hero .hero-copy h1{font-size:clamp(29px,7.6vw,38px);line-height:1.25;max-width:100%}.hero .ribbon-surface{left:0;width:165%}.hero .flow-shade{background:linear-gradient(90deg,#ffffffd9,#ffffffb8 55%,#ffffff70)}.hero .hero-motion-toggle{width:34px;height:34px;min-width:34px;top:16px;right:16px}.header .header-in{gap:8px}.header .brand-name{font-size:15px}.header .brand-name small{font-size:7px;letter-spacing:.1em}.header .header-right{gap:4px}.header .lang-switch{padding:3px;gap:1px}.header .lang-switch a{flex-direction:column;gap:4px;min-width:34px;min-height:40px;padding:4px}.header .lang-switch a span{font-size:10px}.header .lang-switch a img{width:18px;min-width:18px;height:13px}.legal-feature{gap:15px;flex-wrap:nowrap}.legal-feature > div{flex-basis:auto}.legal-feature h3{font-size:20px}.legal-feature .legal-link{font-size:13px}.contact-section .contact-links > a,.contact-section .contact-links > span{font-size:18px}}
+@media(prefers-contrast:more){.hero .flow-shade{background:#ffffffd9}}
+.flag-section .flag-item{justify-content:flex-start}
+.flag-section .flag-item span{min-height:2.8em;line-height:1.4}
