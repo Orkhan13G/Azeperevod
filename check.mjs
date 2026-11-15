@@ -9,7 +9,7 @@ for(const [path,heading] of [['/','Услуги'],['/en/','Services'],['/az/','X
  globalThis.window={location:{pathname:path},matchMedia:()=>({matches:false})};
  const {default:App}=await import('./.qa.mjs?lang='+encodeURIComponent(path));
  const html=renderToStaticMarkup(App());
- assert(html.includes(heading));assert(!html.includes('<form'));assert(!html.includes('why-count'));assert(!html.includes('hero-desc'));assert(html.includes('11 '));assert.equal((html.match(/class="surcharge-row"/g)||[]).length,2);assert(html.includes('yuristvbaku.com'));assert(!html.includes('form-card'));
+ assert(html.includes(heading));assert(!html.includes('<form'));assert(!html.includes('why-count'));assert(!html.includes('hero-desc'));assert(html.includes('11 '));assert.equal((html.match(/class="surcharge-row"/g)||[]).length,2);assert(html.includes('yuristvbaku.com'));assert(!html.includes('form-card'));assert(!html.includes('lucide-pause'));assert(!html.includes('lucide-play'));assert(!html.includes('Немного любопытства'));
  console.log('PASS content:',path);
 }
 await fs.unlink('.qa.mjs');

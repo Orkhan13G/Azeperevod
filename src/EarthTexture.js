@@ -1,9 +1,9 @@
 // Orthographic textured Earth. Rotation matches d3-geo's geographic hit testing.
 // GPU rendering where available, with a bounded software fallback.
-export function createEarthTexture(onReady) {
+export function createEarthTexture(onReady,onError=()=>{}) {
  const surface=document.createElement('canvas');
- let gl=surface.getContext('webgl',{alpha:true,antialias:true,preserveDrawingBuffer:true});
- let program,buffer,texture,ready=false,disposed=false,pixels,software,output,normals,detailRequested=false;
+ let gl=surface.getContext('webgl',{alpha:true,antialias:false,preserveDrawingBuffer:false,powerPreference:'low-power'});
+ let program,buffer,texture,zoomLocation,rotationLocation,ready=false,disposed=false,pixels,software,output,normals,detailRequested=false;
  const detail=new Image();
  if(gl){
   try{
@@ -26,7 +26,7 @@ export function createEarthTexture(onReady) {
    program=gl.createProgram();gl.attachShader(program,vs);gl.attachShader(program,fs);gl.linkProgram(program);
    gl.deleteShader(vs);gl.deleteShader(fs);
    if(!gl.getProgramParameter(program,gl.LINK_STATUS))throw Error('program');
-   gl.useProgram(program);buffer=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,buffer);
+   gl.useProgram(program);zoomLocation=gl.getUniformLocation(program,'zoom');rotationLocation=gl.getUniformLocation(program,'rotation');buffer=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,buffer);
    gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,-1,1,-1,1,1,-1,1,1]),gl.STATIC_DRAW);
    const p=gl.getAttribLocation(program,'p');gl.enableVertexAttribArray(p);gl.vertexAttribPointer(p,2,gl.FLOAT,false,0,0);
    texture=gl.createTexture();gl.bindTexture(gl.TEXTURE_2D,texture);
@@ -47,21 +47,20 @@ export function createEarthTexture(onReady) {
   if(gl){gl.bindTexture(gl.TEXTURE_2D,texture);gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,gl.RGBA,gl.UNSIGNED_BYTE,img)}
   else{const source=document.createElement('canvas');source.width=img.width;source.height=img.height;const c=source.getContext('2d');c.drawImage(img,0,0);pixels=c.getImageData(0,0,img.width,img.height).data}
   ready=true;onReady();
- };img.src='/assets/earth-natural.jpg';
+ };img.onerror=()=>{if(!disposed)onError()};img.src='/assets/earth-natural.jpg';
  const requestDetail=()=>{
   if(!ready||detailRequested||!gl||gl.isContextLost()||gl.getParameter(gl.MAX_TEXTURE_SIZE)<4096)return;
   detailRequested=true;detail.onload=()=>{if(disposed||gl.isContextLost())return;gl.bindTexture(gl.TEXTURE_2D,texture);gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,gl.RGBA,gl.UNSIGNED_BYTE,detail);onReady()};detail.src='/assets/earth-natural-hd.jpg';
  };
  return {
   requestDetail,
-  draw(ctx,size,angle,latitude,zoom=1){
+  draw(ctx,size,angle,latitude,zoom=1,interactive=false){
    if(!ready)return false;
-   if(zoom>1.05)requestDetail();
    const a=angle*Math.PI/180,b=latitude*Math.PI/180;
    if(gl&&!gl.isContextLost()){
-    const resolution=Math.min(800,Math.round(size*Math.min(devicePixelRatio||1,1.6)));
+    const resolution=Math.min(800,Math.round(size*Math.min(devicePixelRatio||1,interactive?1:1.5)));
     if(surface.width!==resolution){surface.width=surface.height=resolution;gl.viewport(0,0,resolution,resolution)}
-    gl.uniform1f(gl.getUniformLocation(program,'zoom'),zoom);gl.uniform2f(gl.getUniformLocation(program,'rotation'),a,b);gl.drawArrays(gl.TRIANGLES,0,6);ctx.drawImage(surface,0,0,size,size);
+    gl.uniform1f(zoomLocation,zoom);gl.uniform2f(rotationLocation,a,b);gl.drawArrays(gl.TRIANGLES,0,6);ctx.drawImage(surface,0,0,size,size);
    }else if(software&&pixels){
     const c=Math.cos(b),s=Math.sin(b);
     for(const [i,x,y,z] of normals){
@@ -76,6 +75,6 @@ export function createEarthTexture(onReady) {
    }else return false;
    return true;
   },
-  dispose(){disposed=true;img.onload=null;detail.onload=null;if(gl){gl.deleteTexture(texture);gl.deleteBuffer(buffer);gl.deleteProgram(program);gl.getExtension('WEBGL_lose_context')?.loseContext()}}
+  dispose(){disposed=true;img.onload=null;img.onerror=null;detail.onload=null;detail.onerror=null;if(gl){gl.deleteTexture(texture);gl.deleteBuffer(buffer);gl.deleteProgram(program);gl.getExtension('WEBGL_lose_context')?.loseContext()}}
  };
 }
