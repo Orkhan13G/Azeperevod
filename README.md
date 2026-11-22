@@ -29,3 +29,7 @@ Globe regression verification: desktop and emulated mobile sizes (1280, 390, 320
 Mouse wheel, trackpad scroll/Control-wheel pinch, touch pinch and +/- zoom are supported. The globe keeps a circular viewport at every zoom level. Earth rendering is cached for country hover; wheel input is batched into animation frames, and detailed imagery is requested after gestures settle. Pause/play controls and the curiosity sentence were removed as requested. Chromium checks cover circular alpha masking at 100–300%, delayed-texture poster display, wheel and trackpad zoom, cached hover rendering, event batching, touch pinch at 390/320px and page scrolling outside the globe.
 
 Second design iteration: a single fixed ribbon runs behind the warm milk-colored page; centered gradient headings, slower hero flags, rectangular service cards beside a brass-scales legal feature, wider About copy, larger text-only benefits, official payment logos, and a compact footer with LinkedIn/VK/Facebook. Payment asset sources are recorded in public/assets/payments/credits.txt. The existing portrait remains until the replacement is supplied. Mobile tariff amounts and units stack for readability.
+
+## Project memory
+
+See [docs/PROJECT_MEMORY.md](docs/PROJECT_MEMORY.md) for the approved design decisions, gradient rationale, editing/deployment methods, and regression checklist. Future coding sessions are directed there by AGENTS.md.
