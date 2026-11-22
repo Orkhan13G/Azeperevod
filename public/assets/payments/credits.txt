@@ -1,0 +1,8 @@
+Payment trademarks belong to their respective owners. Local copies retain their original vector shapes and brand colors.
+Sber: https://dezigma.com/files/logos/sber/s-nadpisyu.svg (source attributed to sberbank.ru)
+Mastercard: https://www.mastercard.com/content/dam/mccom/shared/header/ma_symbol.svg
+Visa: https://cdn.jsdelivr.net/npm/simple-icons@15/icons/visa.svg (Visa wordmark, brand blue)
+SBP: https://sbp.nspk.ru/storage/settings/common/logo/3637fed0-97e8-491b-8eff-9cb99e9b556a.svg
+YooMoney: https://yoomoney.ru/i/forms/iomoney_logo_dark.zip (for_light_bg/iomoney.svg)
+Western Union: https://commons.wikimedia.org/wiki/File:Western_Union_current_logo.svg
+Inline SVG stylesheet declarations are expanded to attributes for the existing Content Security Policy.

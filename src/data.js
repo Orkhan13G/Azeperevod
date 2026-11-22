@@ -7,6 +7,7 @@ export const contact = {
   phone: '+994505267737', phoneLabel: '(+99450) 526-77-37', city: 'Баку, Азербайджан',
   // Update these links only after they are confirmed.
   social: [
+    {label:'LinkedIn',url:'https://www.linkedin.com/in/zaurbayramov/en/'},
     {label:'VK',url:'https://vk.com/azeperevod'},
     {label:'Facebook',url:'https://www.facebook.com/profile.php?id=100000827687775'}
   ]
@@ -23,7 +24,14 @@ export const prices = [
 ];
 // Payment methods confirmed in the October 2026 brief.
 // Confirm that each payment method is available for the customer before invoicing.
-export const paymentMethods = ['Сбербанк','Mastercard','Visa','СБП','ЮMoney','Western Union'];
+export const paymentMethods = [
+ {id:'sber',label:'Сбер',src:'/assets/payments/sber.svg',width:132,height:32},
+ {id:'westernunion',label:'Western Union',src:'/assets/payments/westernunion.svg',width:156,height:36},
+ {id:'yoomoney',label:'ЮMoney',src:'/assets/payments/yoomoney.svg',width:138,height:32},
+ {id:'sbp',label:'СБП',src:'/assets/payments/sbp.svg',width:108,height:48},
+ {id:'visa',label:'Visa',src:'/assets/payments/visa.svg',width:88,height:32},
+ {id:'mastercard',label:'Mastercard',src:'/assets/payments/mastercard.svg',width:65,height:44}
+];
 
 // Add the supplied logo to public/assets and set this path, e.g. /assets/logo.svg.
 export const brandLogo = null;

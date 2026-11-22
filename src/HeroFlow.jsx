@@ -24,7 +24,7 @@ function FlowCanvas() {
       if(!running()||!renderer)return;
       if(!last)last=now;
       const delta=now-last;
-      if(delta>=32){elapsed+=delta;last=now;renderer.draw(elapsed)}
+      if(delta>=(window.innerWidth<640?50:40)){elapsed+=delta;last=now;renderer.draw(elapsed)}
       frame=requestAnimationFrame(tick);
     };
     const sync=()=>{
@@ -63,7 +63,7 @@ function FlowCanvas() {
 }
 
 export function HeroFlow() {
-  return <div className="hero-flow" aria-hidden="true"><FlowCanvas/><div className="flow-shade"/></div>;
+  return <div className="page-wave" aria-hidden="true"><FlowCanvas/><div className="flow-shade"/></div>;
 }
 
 export function FlagRibbon({lang}) {

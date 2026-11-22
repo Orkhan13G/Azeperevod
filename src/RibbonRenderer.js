@@ -227,7 +227,7 @@ async function Z(R, p, { signal: i } = {}) {
       if (n || e.isContextLost()) return;
       const f = R.getBoundingClientRect();
       if (!f.width || !f.height) return;
-      const M = Math.min(window.devicePixelRatio || 1, 2), F = Math.round(f.width * M), A = Math.round(f.height * M);
+      const M = Math.min(window.devicePixelRatio || 1, 1.25, 1700 / f.width), F = Math.round(f.width * M), A = Math.round(f.height * M);
       if (c = Q(f.width, f.height), F !== t || A !== s) {
         if (t = R.width = F, s = R.height = A, e.bindTexture(e.TEXTURE_2D, g), e.texImage2D(e.TEXTURE_2D, 0, e.RGBA8, F, A, 0, e.RGBA, e.UNSIGNED_BYTE, null), e.bindFramebuffer(e.FRAMEBUFFER, P), e.framebufferTexture2D(e.FRAMEBUFFER, e.COLOR_ATTACHMENT0, e.TEXTURE_2D, g, 0), w) {
           if (e.checkFramebufferStatus(e.FRAMEBUFFER) !== e.FRAMEBUFFER_COMPLETE) throw new Error("Incomplete resolve framebuffer");

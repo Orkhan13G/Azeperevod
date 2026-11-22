@@ -50,3 +50,8 @@ for (const [language, text] of Object.entries(translations)) {
  text.privacyBody=text.privacyBody.split('\n\n').filter(paragraph=>!(/Форма запроса|The inquiry form|Sorğu forması/.test(paragraph))).join('\n\n');
  text.cookieText += {ru:' Выбранный язык запоминается в необходимом cookie на один год. При первом посещении Netlify использует страну по IP для выбора языка.',en:' Your language choice is remembered in an essential cookie for one year. On your first visit, Netlify uses your IP-derived country to select a language.',az:' Seçdiyiniz dil bir il müddətinə zəruri cookie-də saxlanılır. İlk ziyarətdə Netlify dili seçmək üçün IP əsasında ölkəni müəyyən edir.'}[language];
 }
+
+// Second design iteration: consistent tariff labels in the header.
+translations.ru.nav[3]='Тарифы';
+translations.en.nav[3]='Rates';
+translations.az.nav[3]='Tariflər';
